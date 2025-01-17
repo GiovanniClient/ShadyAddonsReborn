@@ -29,7 +29,8 @@ public class LocationUtils {
         FARMING_ISLANDS("The Farming Islands"),
         DUNGEON_HUB("Dungeon Hub"),
         CRYSTAL_HOLLOWS("Crystal Hollows"),
-        JERRYS_WORKSHOP("Jerry's Workshop");
+        JERRYS_WORKSHOP("Jerry's Workshop"),
+        GLACITE_MINESHAFTS("Mineshaft");
 
         private String tabName;
 

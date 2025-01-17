@@ -17,10 +17,8 @@ public class Config {
 
     public static boolean autoGg = false;
     public static boolean autoSimonSays = false;
-    public static boolean autoArrowAlign = false;
     public static boolean royalPigeonMacro = false;
 
-    public static boolean autoClicker = false;
     public static int autoClickerMode = 0;
     public static int autoClickerCps = 0;
     public static boolean stopAutoClickerInGui = true;
@@ -59,13 +57,11 @@ public class Config {
     public static boolean healingWandHotkey = false;
     public static boolean fishingRodHotkey = false;
     public static boolean teleportWithAnything = false;
-    public static boolean useItemsWithAnything;
     public static boolean disableOutsideDungeons = false;
     public static boolean soulWhipWithAnything = false;
     public static boolean termWithAnything = false;
     public static boolean aotsWithAnything = false;
     public static boolean autoReadyUp = false;
-    public static boolean blockAbilities = false;
     public static boolean blockCellsAlignment = false;
     public static boolean blockGiantsSlam = false;
     public static boolean blockValkyrie = false;
@@ -81,15 +77,6 @@ public class Config {
     public static boolean terminalHalfTrip = false;
     public static int terminalClickDelay = 100;
 
-    public static boolean mobEsp = false;
-    public static int espThickness = 5;
-    public static boolean sludgeEsp = false;
-    public static boolean yogEsp = false;
-    public static boolean corleoneEsp = false;
-    public static boolean starredMobEsp = false;
-    public static boolean secretBatEsp = false;
-    public static boolean minibossEsp = false;
-
 
     @Property(
             type = Property.Type.BOOLEAN,
@@ -101,7 +88,7 @@ public class Config {
             type = Property.Type.BOOLEAN,
             name = "Auto-Melody"
     )
-    public static boolean autoMelody = true;
+    public static boolean autoMelody = false;
 
     @Property(
             type = Property.Type.BOOLEAN,
@@ -252,6 +239,74 @@ public class Config {
                 parent = "Show Hidden Mobs"
         )
         public static boolean showSneakyCreepers = false;
+
+
+    @Property(
+            type = Property.Type.FOLDER,
+            name = "Mob ESP",
+            note = "Disable Entity Culling in Patcher"
+    )
+    public static boolean mobEsp = false;
+
+    @Property(
+            type = Property.Type.NUMBER,
+            name = "Outline Thickness",
+            parent = "Mob ESP",
+            min = 3,
+            max = 10,
+            suffix = "px"
+    )
+    public static int espThickness = 5;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Glacite Corpses",
+            parent = "Mob ESP"
+    )
+    public static boolean glaciteCorpses = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Sludges",
+            parent = "Mob ESP"
+    )
+    public static boolean sludgeEsp = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Yogs",
+            parent = "Mob ESP"
+    )
+    public static boolean yogEsp = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Corleone",
+            parent = "Mob ESP"
+    )
+    public static boolean corleoneEsp = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Starred Mobs",
+            parent = "Mob ESP"
+    )
+    public static boolean starredMobEsp = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Secret Bats",
+            parent = "Mob ESP"
+    )
+    public static boolean secretBatEsp = false;
+
+    @Property(
+            type = Property.Type.CHECKBOX,
+            name = "Minibosses",
+            parent = "Mob ESP"
+    )
+    public static boolean minibossEsp = false;
+
 
     @Property(
             type = Property.Type.FOLDER,

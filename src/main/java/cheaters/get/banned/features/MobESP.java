@@ -21,6 +21,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
 public class MobESP {
 
@@ -54,6 +55,13 @@ public class MobESP {
 
             if(Config.secretBatEsp && event.entity instanceof EntityBat) {
                 highlightEntity(event.entity, Color.RED);
+            }
+        }
+
+        if (LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+            if(Config.glaciteCorpses && event.entity instanceof EntityArmorStand) {
+                if (!event.entity.isInvisible())
+                    highlightEntity(event.entity, Color.MAGENTA);
             }
         }
 

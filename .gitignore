@@ -20,4 +20,7 @@ build
 # other
 eclipse
 run
+versions
 .DS_Store
+.devauth
+BUILD_RESULT

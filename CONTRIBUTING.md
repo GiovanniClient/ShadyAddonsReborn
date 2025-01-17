@@ -7,7 +7,7 @@ If you wanna run/edit/compile yourself this mod here's how to
 - Once it's done, close and reopen the IDE (you **must**)
 - CTRL + ALT + SHIFT + S -> In *SDK*, select you JDK 8
 - CTRL + ALT + S -> *Build, Execution and Enviroment* -> *Build Tools* -> *Gradle* -> *Gradle JVM* -> Select your JDK 17 (or newer)
-- In the top of the IDE, locate *"Minecraft Client (:1.8.9-forge)*, click and select *Edit Configurations...*, just click *Apply* in the bottom and *Ok*
+- In the top of the IDE, locate *"Minecraft Client (:1.8.9-forge)"*, click and select *Edit Configurations...*, just click *Apply* in the bottom and *Ok*
 - You can now run by clicking the green arrow in the top
 
 ### Optional

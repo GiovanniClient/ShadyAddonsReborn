@@ -10,7 +10,9 @@ I was a fan of ShadyAddons for the *"innocent"* cheats and the unique experience
 ## What's next?
 While I don’t have plans to maintain this mod extensively for others, I encourage anyone interested to contribute! Fork the repository, experiment, and open a pull request if you’d like to share your work.
 
-### Contributing
+### Contributing and Compiling
+Please see [CONTRIBUTING.md](./CONTRIBUTING.md)
+
 If you’re a developer, feel free to fork the repository by clicking:  
 <a href="https://github.com/GiovanniClient/ShadyAddonsReborn/fork"><img height="25px" src="https://user-images.githubusercontent.com/64276359/166626452-89c90800-b3e4-417d-a25c-a0500fa8cc81.png"></a>  
 

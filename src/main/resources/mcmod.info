@@ -1,10 +1,10 @@
 [
     {
-        "modid": "autogg",
-        "name": "ShadyAddons",
-        "url": "https://cheatersgetbanned.me/",
-        "description": "Cheaters get banned",
+        "modid": "this_file_is_not_used_anywhere",
+        "name": "should i delete it?",
+        "url": "",
+        "description": "",
         "version": "",
-        "logoFile": "assets/shadyaddons/logo.png"
+        "logoFile": ""
     }
 ]

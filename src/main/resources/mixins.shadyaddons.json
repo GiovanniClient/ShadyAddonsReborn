@@ -13,7 +13,8 @@
         "MixinModList",
         "MixinNetworkManager",
         "MixinRendererLivingEntity",
-        "MixinSplashProgress"
+        "MixinSplashProgress",
+        "MixinChat"
     ],
     "client": [
         "MixinAbstractClientPlayer",

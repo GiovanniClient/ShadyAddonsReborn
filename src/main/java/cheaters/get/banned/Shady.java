@@ -54,8 +54,8 @@ import java.util.regex.Pattern;
 @Mod(modid = Shady.MOD_ID, name = Shady.MOD_NAME, version = "4.1.3", clientSideOnly = true)
 public class Shady {
 
-    public static final String MOD_NAME = "ShadyAddons";
-    public static final String MOD_ID = "autogg";
+    public static final String MOD_NAME = "Subtitles Mod";
+    public static final String MOD_ID = "subtitles_mod";
     public static final String VERSION = "@VERSION@";
     public static final boolean BETA = VERSION.contains("-pre") || VERSION.equals("@VER"+"SION@");
 
@@ -71,7 +71,6 @@ public class Shady {
 
     public static GuiScreen guiToOpen = null;
     public static boolean enabled = true;
-    private static boolean sentPlayTimeCommand = false;
     private static boolean sentPlayTimeData = false;
     private static Pattern playTimePattern = Pattern.compile("You have (\\d*) hours and \\d* minutes playtime!");
 
@@ -92,7 +91,7 @@ public class Shady {
         MapController.loadRooms();
 
         // Do Remote Things
-        Updater.check();
+        //Updater.check();
         Analytics.collect("version", VERSION);
     }
 
@@ -107,36 +106,37 @@ public class Shady {
         MinecraftForge.EVENT_BUS.register(new MiscStats());
         MinecraftForge.EVENT_BUS.register(new RoutineHooks());
 
-        MinecraftForge.EVENT_BUS.register(new BlockAbilities());
-        MinecraftForge.EVENT_BUS.register(new StonklessStonk());
-        MinecraftForge.EVENT_BUS.register(new GhostBlocks());
+        MinecraftForge.EVENT_BUS.register(new BlockAbilities()); // blocca abilità col dx
+        MinecraftForge.EVENT_BUS.register(new StonklessStonk()); // ghosthand
+        MinecraftForge.EVENT_BUS.register(new GhostBlocks()); // non funziona !!!!!!!!!!!!!!!!!!
         MinecraftForge.EVENT_BUS.register(new AutoCloseChest());
-        MinecraftForge.EVENT_BUS.register(new RoyalPigeonMacro());
-        MinecraftForge.EVENT_BUS.register(new AutoGG());
-        // MinecraftForge.EVENT_BUS.register(new AutoSimonSays());
-        MinecraftForge.EVENT_BUS.register(new AbilityKeybind());
-        MinecraftForge.EVENT_BUS.register(new AutoClicker());
-        MinecraftForge.EVENT_BUS.register(new AutoRenewCrystalHollows());
+        //MinecraftForge.EVENT_BUS.register(new RoyalPigeonMacro());
+        //MinecraftForge.EVENT_BUS.register(new AutoGG());
+        //MinecraftForge.EVENT_BUS.register(new AutoSimonSays());
+        //MinecraftForge.EVENT_BUS.register(new AbilityKeybind());
+        //MinecraftForge.EVENT_BUS.register(new AutoClicker());
+        //MinecraftForge.EVENT_BUS.register(new AutoRenewCrystalHollows());
         MinecraftForge.EVENT_BUS.register(new DisableSwordAnimation());
         MinecraftForge.EVENT_BUS.register(new ShowHiddenEntities());
-        MinecraftForge.EVENT_BUS.register(new HideSummons());
-        MinecraftForge.EVENT_BUS.register(new TeleportWithAnything());
-        MinecraftForge.EVENT_BUS.register(new ItemMacro());
+        //MinecraftForge.EVENT_BUS.register(new HideSummons());
+        //MinecraftForge.EVENT_BUS.register(new TeleportWithAnything());
+        //MinecraftForge.EVENT_BUS.register(new ItemMacro());
         MinecraftForge.EVENT_BUS.register(new MobESP());
         MinecraftForge.EVENT_BUS.register(new GemstoneESP());
         // MinecraftForge.EVENT_BUS.register(new NewAutoTerminals());
-        MinecraftForge.EVENT_BUS.register(new AutoTerminals());
+        //MinecraftForge.EVENT_BUS.register(new AutoTerminals());
         MinecraftForge.EVENT_BUS.register(new AutoMelody());
-        MinecraftForge.EVENT_BUS.register(new AutoReadyUp());
+        MinecraftForge.EVENT_BUS.register(new AutoExperiments());
+        //MinecraftForge.EVENT_BUS.register(new AutoReadyUp());
         // MinecraftForge.EVENT_BUS.register(new CrystalReach());
-        MinecraftForge.EVENT_BUS.register(new AutoSalvage());
-        MinecraftForge.EVENT_BUS.register(new AutoSell());
-        MinecraftForge.EVENT_BUS.register(new SocialCommandSolver());
-        MinecraftForge.EVENT_BUS.register(new ConnectFourSolver());
+        //MinecraftForge.EVENT_BUS.register(new AutoSalvage());
+        //MinecraftForge.EVENT_BUS.register(new AutoSell());
+        //MinecraftForge.EVENT_BUS.register(new SocialCommandSolver());
+        //MinecraftForge.EVENT_BUS.register(new ConnectFourSolver());
         MinecraftForge.EVENT_BUS.register(new AutoWardrobe());
         // MinecraftForge.EVENT_BUS.register(new CrystalEtherwarp());
-        MinecraftForge.EVENT_BUS.register(new NoRotate());
-        MinecraftForge.EVENT_BUS.register(new AntiKB());
+        //MinecraftForge.EVENT_BUS.register(new NoRotate());
+        //MinecraftForge.EVENT_BUS.register(new AntiKB());
 
         MinecraftForge.EVENT_BUS.register(new MapController());
         MinecraftForge.EVENT_BUS.register(new MapView());
@@ -153,10 +153,9 @@ public class Shady {
         USING_SBA = Loader.isModLoaded("skyblockaddons");
         USING_PATCHER = Loader.isModLoaded("patcher");
         USING_SKYTILS = Loader.isModLoaded("skytils");
-        USING_SKYTILS = Loader.isModLoaded("skytils");
         USING_SBE = Loader.isModLoaded("skyblockextras");
 
-        Capes.load(); // TODO: Figure out how to make this async
+        //Capes.load(); // TODO: Figure out how to make this async
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime firstRun = now.withSecond(0).plusMinutes(1);
@@ -193,23 +192,6 @@ public class Shady {
 
         if(shouldCrash) {
             throw new NullPointerException("You did this to yourself! Isn't it wonderful?");
-        }
-
-        if(Utils.inSkyBlock && !sentPlayTimeCommand) {
-            Utils.sendMessageAsPlayer("/playtime");
-            sentPlayTimeCommand = true;
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onChat(ClientChatReceivedEvent event) {
-        if(Utils.inSkyBlock && sentPlayTimeCommand && !sentPlayTimeData && event.message.getUnformattedText().contains("minutes playtime!")) {
-            Matcher matcher = playTimePattern.matcher(event.message.getUnformattedText());
-            if(matcher.matches()) {
-                Analytics.collect("playtime", matcher.group(1));
-                event.setCanceled(true);
-                sentPlayTimeData = true;
-            }
         }
     }
 

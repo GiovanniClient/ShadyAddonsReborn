@@ -45,5 +45,18 @@ public class GhostBlocks {
             }
         }
     }
+/*
+    @SubscribeEvent
+    public void onLeftClick(ClickEvent.Left event) {
+        if(Utils.inSkyBlock && Config.stonkGhostBlock && Shady.mc.objectMouseOver != null &&
+                Shady.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK &&
+                !Utils.isInteractable(Shady.mc.theWorld.getBlockState(Shady.mc.objectMouseOver.getBlockPos()).getBlock())) {
 
+            String itemId = Utils.getSkyBlockID(Shady.mc.thePlayer.getHeldItem());
+            if(itemId.equals("STONK_PICKAXE") || itemId.equals("GOLD_PICKAXE") || itemId.equals("DIAMOND_PICKAXE")) {
+                Shady.mc.theWorld.setBlockToAir(Shady.mc.objectMouseOver.getBlockPos());
+                event.setCanceled(true);
+            }
+        }
+    }*/
 }

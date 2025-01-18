@@ -6,6 +6,7 @@ import cheaters.get.banned.events.RenderEntityModelEvent;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.OutlineUtils;
 import cheaters.get.banned.utils.Utils;
+import net.minecraft.block.BlockSeaLantern;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;
@@ -13,6 +14,9 @@ import net.minecraft.entity.monster.EntityMagmaCube;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityBat;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -60,8 +64,21 @@ public class MobESP {
 
         if (LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
             if(Config.glaciteCorpses && event.entity instanceof EntityArmorStand) {
-                if (!event.entity.isInvisible())
-                    highlightEntity(event.entity, Color.MAGENTA);
+                EntityArmorStand armorStand = (EntityArmorStand) event.entity;
+                if(armorStand.getShowArms())
+                    highlightEntity(event.entity, Color.BLUE);
+
+                /*
+                armor on client is null but not on server? i hate 1.8.9 :(
+                i wanted to color corpses based on armor but maybe can't be done
+
+                ItemStack helmetStack = armorStand.getCurrentArmor(0);
+                ItemStack seaLanternStack = new ItemStack(Item.getItemFromBlock(Blocks.sea_lantern)); //lapis
+
+                if (helmetStack != null && helmetStack.getIsItemStackEqual(seaLanternStack))
+                    highlightEntity(event.entity, Color.BLUE);
+
+                 */
             }
         }
 

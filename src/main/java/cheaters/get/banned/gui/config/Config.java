@@ -260,7 +260,7 @@ public class Config {
 
     @Property(
             type = Property.Type.CHECKBOX,
-            name = "Glacite Corpses",
+            name = "Mineshaft Corpses",
             parent = "Mob ESP"
     )
     public static boolean glaciteCorpses = false;

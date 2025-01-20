@@ -1,10 +1,10 @@
 [
     {
         "modid": "this_file_is_only_used_in_prismlauncher_and_such_but_overwritten_at_runtime",
-        "name": "ShadyAddonsReborn",
+        "name": "${name}",
         "url": "",
         "description": "",
-        "version": "1.1.0",
+        "version": "${version}",
         "logoFile": ""
     }
 ]

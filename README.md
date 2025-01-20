@@ -8,7 +8,9 @@ I was a fan of ShadyAddons for the *"innocent"* cheats and the unique experience
 - Focused on retaining and improving core features that made ShadyAddons enjoyable and useful to me.
 
 ## What's next?
-While I don’t have plans to maintain this mod extensively for others, I encourage anyone interested to contribute! Fork the repository, experiment, and open a pull request if you’d like to share your work.
+* I would like to port the config menu to [OneConfig](https://polyfrost.org/projects/oneconfig/)
+* Add new features! Feel free to give suggestions, maybe open an issue or DM me
+* Make the mod more Team Rocket themed
 
 ### Contributing and Compiling
 Please see [CONTRIBUTING.md](./CONTRIBUTING.md)

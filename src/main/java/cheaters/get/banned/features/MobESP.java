@@ -1,11 +1,14 @@
 package cheaters.get.banned.features;
 
+import cheaters.get.banned.Shady;
 import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.gui.config.settings.FolderSetting;
 import cheaters.get.banned.events.RenderEntityModelEvent;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.OutlineUtils;
 import cheaters.get.banned.utils.Utils;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import net.minecraft.block.BlockSeaLantern;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
@@ -17,9 +20,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.S04PacketEntityEquipment;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -62,26 +70,6 @@ public class MobESP {
             }
         }
 
-        if (LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
-            if(Config.glaciteCorpses && event.entity instanceof EntityArmorStand) {
-                EntityArmorStand armorStand = (EntityArmorStand) event.entity;
-                if(armorStand.getShowArms())
-                    highlightEntity(event.entity, Color.BLUE);
-
-                /*
-                armor on client is null but not on server? i hate 1.8.9 :(
-                i wanted to color corpses based on armor but maybe can't be done
-
-                ItemStack helmetStack = armorStand.getCurrentArmor(0);
-                ItemStack seaLanternStack = new ItemStack(Item.getItemFromBlock(Blocks.sea_lantern)); //lapis
-
-                if (helmetStack != null && helmetStack.getIsItemStackEqual(seaLanternStack))
-                    highlightEntity(event.entity, Color.BLUE);
-
-                 */
-            }
-        }
-
         if(Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
             if(Config.sludgeEsp) {
                 if(event.entity instanceof EntitySlime && !(event.entity instanceof EntityMagmaCube)) {
@@ -108,6 +96,21 @@ public class MobESP {
 
     @SubscribeEvent
     public void onRenderEntityModel(RenderEntityModelEvent event) {
+        if(Config.glaciteCorpses && LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+            if(event.entity instanceof EntityArmorStand) {
+                EntityArmorStand armorStand = (EntityArmorStand) event.entity;
+                if (armorStand.getShowArms()) {
+                    highlightEntity(event.entity, Color.MAGENTA);
+                }
+                // i wanted to change the color based on the corpse type
+                // (by checking their outfit) tho i think i'm too skill issued to pull it off
+            }
+        }
+        if(Config.glaciteCorpses && !LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+            highlightedEntities.clear(); // for some reason, onWorldLoad isn't always clearing it, so...
+        }
+
+
         if(Utils.inDungeon && !checkedStarNameTags.contains(event.entity) && Config.starredMobEsp) {
             if(event.entity instanceof EntityArmorStand) {
                 if(event.entity.hasCustomName() && event.entity.getCustomNameTag().contains("✯")) {

@@ -2,7 +2,6 @@ package cheaters.get.banned.features.routines;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import scala.Int;
 
 public class RoutineElementData {
 

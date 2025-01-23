@@ -35,7 +35,7 @@ public class MiscStats {
     }
 
     public static void send() {
-        Analytics.collect("stats", toJson());
+        //Analytics.collect("stats", toJson());
         data.clear();
     }
 

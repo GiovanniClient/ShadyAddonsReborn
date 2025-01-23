@@ -5,10 +5,8 @@ import cheaters.get.banned.features.routines.Routines;
 import cheaters.get.banned.utils.HttpUtils;
 import cheaters.get.banned.utils.Utils;
 import org.apache.commons.io.FileUtils;
-import org.apache.http.client.utils.URIBuilder;
 
 import java.io.File;
-import java.util.UUID;
 
 public class RoutinesAPI {
 
@@ -33,6 +31,8 @@ public class RoutinesAPI {
             } catch(Exception ignored) {}
         }, "ShadyAddons-InstallRoutineAPI").start();
     }
+/*
+    https://www.reddit.com/r/minecraftclients/comments/1i5eguk/comment/m8fbhg6
 
     public static void openAuthWebsite() {
         try {
@@ -47,5 +47,5 @@ public class RoutinesAPI {
             Utils.openUrl(url.toString());
         } catch(Exception ignored) {}
     }
-
+*/
 }

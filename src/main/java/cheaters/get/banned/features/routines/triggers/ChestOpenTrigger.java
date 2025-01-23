@@ -5,12 +5,8 @@ import cheaters.get.banned.features.routines.RoutineRuntimeException;
 import cheaters.get.banned.utils.ReflectionUtils;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryLargeChest;
-import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.fml.common.eventhandler.Event;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
-import org.lwjgl.input.Keyboard;
 
 public class ChestOpenTrigger extends Trigger {
 

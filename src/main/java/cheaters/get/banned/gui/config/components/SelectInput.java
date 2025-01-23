@@ -1,6 +1,5 @@
 package cheaters.get.banned.gui.config.components;
 
-import cheaters.get.banned.Shady;
 import cheaters.get.banned.gui.config.settings.SelectSetting;
 import cheaters.get.banned.utils.FontUtils;
 import net.minecraft.client.Minecraft;

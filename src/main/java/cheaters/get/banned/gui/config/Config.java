@@ -3,8 +3,6 @@ package cheaters.get.banned.gui.config;
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.features.AutoWardrobe;
 import cheaters.get.banned.features.commandpalette.CommandPalette;
-import cheaters.get.banned.features.routines.Routines;
-import cheaters.get.banned.stats.RoutinesAPI;
 import cheaters.get.banned.utils.Utils;
 
 public class Config {
@@ -95,6 +93,13 @@ public class Config {
             name = "Auto-Experiments"
     )
     public static boolean autoExperiments = false;
+
+    @Property(
+            type = Property.Type.BOOLEAN,
+            name = "JungleCheddar",
+            note = "Auto Jungle Cheese"
+    )
+    public static boolean jungleCheddar = false;
 
     @Property(
             type = Property.Type.BOOLEAN,

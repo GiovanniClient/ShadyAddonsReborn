@@ -4,7 +4,6 @@ import cheaters.get.banned.events.MinuteEvent;
 import cheaters.get.banned.events.TickEndEvent;
 import cheaters.get.banned.features.*;
 import cheaters.get.banned.features.commandpalette.CommandPalette;
-import cheaters.get.banned.features.connectfoursolver.ConnectFourSolver;
 import cheaters.get.banned.features.map.MapController;
 import cheaters.get.banned.features.map.MapView;
 import cheaters.get.banned.features.routines.RoutineHooks;
@@ -15,19 +14,17 @@ import cheaters.get.banned.gui.config.MainCommand;
 import cheaters.get.banned.gui.config.settings.BooleanSetting;
 import cheaters.get.banned.gui.config.settings.SelectSetting;
 import cheaters.get.banned.gui.config.settings.Setting;
-import cheaters.get.banned.remote.Capes;
 import cheaters.get.banned.remote.DisableFeatures;
 import cheaters.get.banned.remote.UpdateGui;
 import cheaters.get.banned.remote.Updater;
-import cheaters.get.banned.stats.Analytics;
 import cheaters.get.banned.stats.MiscStats;
 import cheaters.get.banned.utils.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.ClientCommandHandler;
-import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -36,7 +33,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.apache.commons.lang3.SystemUtils;
@@ -48,7 +44,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Mod(modid = Shady.MOD_ID, name = Shady.MOD_NAME, version = "4.1.3", clientSideOnly = true)
@@ -91,8 +86,8 @@ public class Shady {
         MapController.loadRooms();
 
         // Do Remote Things
-        //Updater.check();
-        Analytics.collect("version", VERSION);
+        // Updater.check();
+        // Analytics.collect("version", VERSION);
     }
 
     @Mod.EventHandler
@@ -105,6 +100,8 @@ public class Shady {
         MinecraftForge.EVENT_BUS.register(new RotationUtils());
         MinecraftForge.EVENT_BUS.register(new MiscStats());
         MinecraftForge.EVENT_BUS.register(new RoutineHooks());
+
+        MinecraftForge.EVENT_BUS.register(new JungleCheddar());
 
         MinecraftForge.EVENT_BUS.register(new BlockAbilities()); // blocca abilità col dx
         MinecraftForge.EVENT_BUS.register(new StonklessStonk()); // ghosthand
@@ -173,7 +170,7 @@ public class Shady {
     public void onMinute(MinuteEvent event) {
         if(MiscStats.minutesSinceLastSend == 5) {
             MiscStats.minutesSinceLastSend = 0;
-            MiscStats.send();
+            //MiscStats.send();
         }
 
         if(EstonianUtils.isEstoniaDay() && Shady.mc.theWorld != null && Math.random() > 0.9) {
@@ -225,6 +222,11 @@ public class Shady {
             if(setting instanceof BooleanSetting) setting.set(false);
             if(setting instanceof SelectSetting) setting.set(0);
         }
+    }
+
+    // for easy chat output
+    public static void out(String message) {
+        Shady.mc.thePlayer.addChatMessage(new ChatComponentText("[Shady] " + message));
     }
 
 }

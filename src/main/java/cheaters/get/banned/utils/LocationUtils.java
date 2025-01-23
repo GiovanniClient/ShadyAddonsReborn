@@ -2,7 +2,6 @@ package cheaters.get.banned.utils;
 
 import cheaters.get.banned.events.TickEndEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.HashMap;
 

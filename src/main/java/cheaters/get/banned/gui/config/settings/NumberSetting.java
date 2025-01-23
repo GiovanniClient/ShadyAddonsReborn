@@ -1,7 +1,6 @@
 package cheaters.get.banned.gui.config.settings;
 
 import cheaters.get.banned.gui.config.Property;
-import cheaters.get.banned.utils.EstonianUtils;
 import net.minecraft.util.MathHelper;
 
 import java.lang.reflect.Field;

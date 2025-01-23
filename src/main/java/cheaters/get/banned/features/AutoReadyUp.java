@@ -1,8 +1,8 @@
 package cheaters.get.banned.features;
 
 import cheaters.get.banned.Shady;
-import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.events.TickEndEvent;
+import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.utils.Utils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityArmorStand;

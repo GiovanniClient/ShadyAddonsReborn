@@ -1,10 +1,10 @@
 package cheaters.get.banned.features;
 
 import cheaters.get.banned.Shady;
-import cheaters.get.banned.gui.config.Config;
-import cheaters.get.banned.gui.config.settings.FolderSetting;
 import cheaters.get.banned.events.BlockChangeEvent;
 import cheaters.get.banned.events.TickEndEvent;
+import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.config.settings.FolderSetting;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.RenderUtils;
 import cheaters.get.banned.utils.Utils;

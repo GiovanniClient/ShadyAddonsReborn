@@ -350,48 +350,66 @@ public class Config {
                 parent = "Gemstone ESP"
         )
         public static boolean rubyEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Amber",
                 parent = "Gemstone ESP"
         )
         public static boolean amberEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Sapphire",
                 parent = "Gemstone ESP"
         )
         public static boolean sapphireEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Jade",
                 parent = "Gemstone ESP"
         )
         public static boolean jadeEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Amethyst",
                 parent = "Gemstone ESP"
         )
         public static boolean amethystEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Topaz",
                 parent = "Gemstone ESP"
         )
         public static boolean topazEsp = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Jasper",
                 parent = "Gemstone ESP"
         )
         public static boolean jasperEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Onyx",
+                parent = "Gemstone ESP"
+        )
+        public static boolean onyxEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Peridot",
+                parent = "Gemstone ESP"
+        )
+        public static boolean peridotEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Aquamarine",
+                parent = "Gemstone ESP"
+        )
+        public static boolean aquamarineEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Citrine",
+                parent = "Gemstone ESP"
+        )
+        public static boolean citrineEsp = false;
 
 
     @Property(

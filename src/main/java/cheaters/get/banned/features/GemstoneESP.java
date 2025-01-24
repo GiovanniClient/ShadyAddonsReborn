@@ -31,7 +31,7 @@ public class GemstoneESP {
     private boolean isScanning = false;
 
     enum Gemstone {
-        RUBY(new Color(188, 3, 29), EnumDyeColor.RED),
+        RUBY(new Color(0xff, 0, 0), EnumDyeColor.RED),
         AMETHYST(new Color(137, 0, 201), EnumDyeColor.PURPLE),
         JADE(new Color(157, 249, 32), EnumDyeColor.LIME),
         SAPPHIRE(new Color(60, 121, 224), EnumDyeColor.LIGHT_BLUE),
@@ -39,13 +39,23 @@ public class GemstoneESP {
         TOPAZ(new Color(249, 215, 36), EnumDyeColor.YELLOW),
         JASPER(new Color(214, 15, 150), EnumDyeColor.MAGENTA),
 
+        ONYX(new Color(0, 0, 0), EnumDyeColor.BLACK),
+        PERIDOT(new Color(0, 0x7e, 0), EnumDyeColor.GREEN),
+        AQUAMARINE(new Color(0, 3, 0xad), EnumDyeColor.BLUE),
+        CITRINE(new Color(0x90, 0x34, 0x05), EnumDyeColor.BROWN), // don't mine amber and citrine together ig
+
         RUBY_SHARD(RUBY),
         AMETHYST_SHARD(AMETHYST),
         JADE_SHARD(JADE),
         SAPPHIRE_SHARD(SAPPHIRE),
         AMBER_SHARD(AMBER),
         TOPAZ_SHARD(TOPAZ),
-        JASPER_SHARD(JASPER);
+        JASPER_SHARD(JASPER),
+
+        ONYX_SHARD(ONYX),
+        PERIDOT_SHARD(PERIDOT),
+        AQUAMARINE_SHARD(AQUAMARINE),
+        CITRINE_SHARD(CITRINE);
 
         public Color color;
         public EnumDyeColor dyeColor;
@@ -121,7 +131,7 @@ public class GemstoneESP {
                 Shady.mc.theWorld != null &&
                 FolderSetting.isEnabled("Gemstone ESP") &&
                 Utils.inSkyBlock &&
-                LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS);
+                (LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS) || LocationUtils.onIsland(LocationUtils.Island.DWARVEN_MINES));
     }
 
     private static Gemstone getGemstone(IBlockState block) {
@@ -136,6 +146,11 @@ public class GemstoneESP {
         if(color == Gemstone.AMBER.dyeColor) return Gemstone.AMBER;
         if(color == Gemstone.TOPAZ.dyeColor) return Gemstone.TOPAZ;
         if(color == Gemstone.JASPER.dyeColor) return Gemstone.JASPER;
+
+        if(color == Gemstone.ONYX.dyeColor) return Gemstone.ONYX;
+        if(color == Gemstone.PERIDOT.dyeColor) return Gemstone.PERIDOT;
+        if(color == Gemstone.AQUAMARINE.dyeColor) return Gemstone.AQUAMARINE;
+        if(color == Gemstone.CITRINE.dyeColor) return Gemstone.CITRINE;
 
         return null;
     }
@@ -157,6 +172,15 @@ public class GemstoneESP {
                     return Config.topazEsp;
                 case JASPER_SHARD:
                     return Config.jasperEsp;
+
+                case ONYX_SHARD:
+                    return Config.onyxEsp;
+                case PERIDOT_SHARD:
+                    return Config.peridotEsp;
+                case AQUAMARINE_SHARD:
+                    return Config.aquamarineEsp;
+                case CITRINE_SHARD:
+                    return Config.citrineEsp;
             }
         }
 
@@ -175,6 +199,14 @@ public class GemstoneESP {
                 return Config.topazEsp;
             case JASPER:
                 return Config.jasperEsp;
+            case ONYX:
+                return Config.onyxEsp;
+            case PERIDOT:
+                return Config.peridotEsp;
+            case AQUAMARINE:
+                return Config.aquamarineEsp;
+            case CITRINE:
+                return Config.citrineEsp;
             default:
                 return false;
         }

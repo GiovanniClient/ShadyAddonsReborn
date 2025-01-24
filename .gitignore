@@ -1,3 +1,26 @@
-DS_Store
+# on second thought, let's leave this here
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+.DS_Store
 .devauth
 BUILD_RESULT.lnk

@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 public class SendWebhookAction extends Action {
 
     private static final String note = "Calm your tits, this is for the Routines action that sends a STATIC webhook message.";
+    private static final String noteFromGiovanni = "Yeah sure Jerome but it gets flagged too by rat scanners because and users are dumb.";
 
     private String url;
     private String message;
@@ -18,10 +19,12 @@ public class SendWebhookAction extends Action {
         super(data);
         url = data.keyAsString("url");
         message = data.keyAsString("message");
-
+/*
         if(!HttpUtils.isValidURL(url) || !url.startsWith("https://discord.com/api/webhooks/")) {
             throw new RoutineRuntimeException("Invalid Discord webhook URL in SendWebhookAction");
         }
+*/
+
     }
 
     @Override

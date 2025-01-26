@@ -142,7 +142,7 @@ public class Utils {
         }
     }
 
-    public static void sendModMessage(String message) {
+    public static void out(String message) {
         if(message.contains("§")) {
             sendMessage("§" + FontUtils.getRainbowCode('7') + "ShadyAddons > §f" + message);
         } else {

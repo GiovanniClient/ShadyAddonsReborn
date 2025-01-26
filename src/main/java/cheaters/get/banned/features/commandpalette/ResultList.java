@@ -490,7 +490,7 @@ public class ResultList {
                         new ImageIcon("calc.png"),
                         new RunnableAction(() -> {
                             Utils.copyToClipboard(resultString);
-                            Utils.sendModMessage("Copied §e" + resultString + "§f to your clipboard!");
+                            Utils.out("Copied §e" + resultString + "§f to your clipboard!");
                         }),
                         "Press enter to copy"
                 ));

@@ -249,7 +249,7 @@ public class Config {
     @Property(
             type = Property.Type.FOLDER,
             name = "Mob ESP",
-            note = "Disable Entity Culling in Patcher"
+            note = "type /patcher -> disable entity culling"
     )
     public static boolean mobEsp = false;
 
@@ -430,7 +430,7 @@ public class Config {
     )
     public static Runnable openCommandPalette = () -> {
         Shady.guiToOpen = new CommandPalette();
-        Utils.sendModMessage("You can customize the shortcut in Minecraft controls (which you can open with the Command Palette!)");
+        Utils.out("You can customize the shortcut in Minecraft controls (which you can open with the Command Palette!)");
     };
 
     @Property(
@@ -442,9 +442,9 @@ public class Config {
     public static Runnable openWardrobe = () -> {
         if(Utils.inSkyBlock) {
             AutoWardrobe.open(1, 0);
-            Utils.sendModMessage("Use /sh wardrobe [slot] to equip a specific set!");
+            Utils.out("Use /sh wardrobe [slot] to equip a specific set!");
         } else {
-            Utils.sendModMessage("You must be in SkyBlock to use this!");
+            Utils.out("You must be in SkyBlock to use this!");
         }
     };
 

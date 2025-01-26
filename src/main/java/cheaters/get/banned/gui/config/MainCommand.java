@@ -60,7 +60,7 @@ public class MainCommand extends CommandBase {
                     if(args.length == 2) {
                         RoutinesAPI.download(args[1]);
                     } else {
-                        Utils.sendModMessage("No routine ID specified");
+                        Utils.out("No routine ID specified");
                     }
                     break;
 
@@ -70,14 +70,14 @@ public class MainCommand extends CommandBase {
                         Desktop.getDesktop().open(Routines.routinesDir);
                         // Utils.sendModMessage("There is no GUI yet :)");
                     } catch(IOException e) {
-                        Utils.sendModMessage("Unable to open directory");
-                        Utils.sendModMessage("Find it manually at .../minecraft/config/shady/routines");
+                        Utils.out("Unable to open directory");
+                        Utils.out("Find it manually at .../minecraft/config/shady/routines");
                     }
                     break;
 
                 case "wardrobe":
                     if(!Utils.inSkyBlock) {
-                        Utils.sendModMessage("You must be in SkyBlock to use this command!");
+                        Utils.out("You must be in SkyBlock to use this command!");
                         return;
                     }
 
@@ -87,7 +87,7 @@ public class MainCommand extends CommandBase {
                     }
 
                     if(!MathUtils.isNumber(args[1])) {
-                        Utils.sendModMessage(INVALID_ARGUMENTS);
+                        Utils.out(INVALID_ARGUMENTS);
                         return;
                     }
 
@@ -105,13 +105,13 @@ public class MainCommand extends CommandBase {
                             return;
                         }
 
-                        Utils.sendModMessage(INVALID_ARGUMENTS);
+                        Utils.out(INVALID_ARGUMENTS);
                         return;
                     }
 
                     if(args.length == 3) {
                         if(!MathUtils.isNumber(args[2])) {
-                            Utils.sendModMessage(INVALID_ARGUMENTS);
+                            Utils.out(INVALID_ARGUMENTS);
                             return;
                         }
 
@@ -126,12 +126,12 @@ public class MainCommand extends CommandBase {
 
                 case "force_dungeon":
                     Utils.forceDungeon = !Utils.forceDungeon;
-                    Utils.sendModMessage("Toggled forcing dungeon to "+Utils.forceDungeon);
+                    Utils.out("Toggled forcing dungeon to "+Utils.forceDungeon);
                     break;
 
                 case "force_skyblock":
                     Utils.forceSkyBlock = !Utils.forceSkyBlock;
-                    Utils.sendModMessage("Toggled forcing SkyBlock to "+Utils.forceSkyBlock);
+                    Utils.out("Toggled forcing SkyBlock to "+Utils.forceSkyBlock);
                     break;
 
                 case "debug":
@@ -143,10 +143,10 @@ public class MainCommand extends CommandBase {
 
                             case "routines":
                                 for(Routine routine : Routines.routines.values()) {
-                                    Utils.sendModMessage(StringUtils.rightPad(routine.name + ' ', 40, '-'));
-                                    Utils.sendModMessage("Concurrent: " + (routine.allowConcurrent ? "true" : "false"));
-                                    Utils.sendModMessage("Trigger: " + routine.trigger.getClass().getSimpleName());
-                                    Utils.sendModMessage("Actions: " + routine.actions.size());
+                                    Utils.out(StringUtils.rightPad(routine.name + ' ', 40, '-'));
+                                    Utils.out("Concurrent: " + (routine.allowConcurrent ? "true" : "false"));
+                                    Utils.out("Trigger: " + routine.trigger.getClass().getSimpleName());
+                                    Utils.out("Actions: " + routine.actions.size());
                                 }
                                 break;
 
@@ -170,20 +170,20 @@ public class MainCommand extends CommandBase {
 
                             case "scan":
                                 MapController.scannedMap = MapScanner.getScan();
-                                Utils.sendModMessage("Forced scan, check logs for any errors");
+                                Utils.out("Forced scan, check logs for any errors");
 
                                 if(MapController.scannedMap == null) {
-                                    Utils.sendModMessage("Map is null");
+                                    Utils.out("Map is null");
                                     break;
                                 }
                                 break;
 
                             case "core":
-                                Utils.sendModMessage("Core: " + MapScanner.getCore(Shady.mc.thePlayer.getPosition().getX(), Shady.mc.thePlayer.getPosition().getZ()));
+                                Utils.out("Core: " + MapScanner.getCore(Shady.mc.thePlayer.getPosition().getX(), Shady.mc.thePlayer.getPosition().getZ()));
                                 break;
 
                             default:
-                                Utils.sendModMessage("&cDebug command not found");
+                                Utils.out("&cDebug command not found");
                         }
                     }
                     break;
@@ -193,7 +193,7 @@ public class MainCommand extends CommandBase {
                     break;
 
                 default:
-                    Utils.sendModMessage(UNKNOWN_COMMAND);
+                    Utils.out(UNKNOWN_COMMAND);
             }
         } else {
             Shady.guiToOpen = new ConfigGui(new ResourceLocation("shadyaddons:"+Utils.getLogo()+".png"));

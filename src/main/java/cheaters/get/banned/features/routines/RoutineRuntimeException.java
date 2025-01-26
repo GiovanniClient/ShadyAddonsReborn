@@ -25,7 +25,7 @@ public class RoutineRuntimeException extends Exception {
 
     public void display() {
         System.out.println(getMessage());
-        if(Shady.mc.theWorld != null) Utils.sendModMessage("§c" + getMessage());
+        if(Shady.mc.theWorld != null) Utils.out("§c" + getMessage());
     }
 
 }

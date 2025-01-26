@@ -21,7 +21,7 @@ public class SocialCommandSolver {
                 MiscStats.add(MiscStats.Metric.MATH_PROBLEMS_SOLVED);
                 new Thread(() -> {
                     ThreadUtils.sleep(Config.quickMathsAnswerDelay);
-                    Utils.sendModMessage("The answer is " + answer);
+                    Utils.out("The answer is " + answer);
                     Utils.sendMessageAsPlayer("/ac " + answer);
                 }).start();
             }

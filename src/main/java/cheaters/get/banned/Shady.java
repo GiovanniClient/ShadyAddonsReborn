@@ -102,6 +102,7 @@ public class Shady {
         MinecraftForge.EVENT_BUS.register(new RoutineHooks());
 
         MinecraftForge.EVENT_BUS.register(new JungleCheddar());
+        MinecraftForge.EVENT_BUS.register(new BarrierESP());
 
         MinecraftForge.EVENT_BUS.register(new BlockAbilities()); // blocca abilità col dx
         MinecraftForge.EVENT_BUS.register(new StonklessStonk()); // ghosthand
@@ -222,11 +223,6 @@ public class Shady {
             if(setting instanceof BooleanSetting) setting.set(false);
             if(setting instanceof SelectSetting) setting.set(0);
         }
-    }
-
-    // for easy chat output
-    public static void out(String message) {
-        Shady.mc.thePlayer.addChatMessage(new ChatComponentText("[Shady] " + message));
     }
 
 }

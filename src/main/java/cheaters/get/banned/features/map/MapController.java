@@ -40,7 +40,7 @@ public class MapController {
     public static int roomSize = 16;
 
     public static void calibrate() {
-        Utils.log("Beginning calibration");
+        //Utils.log("Beginning calibration");
         switch(DungeonUtils.floor) {
             case FLOOR_1:
                 startCorner[0] = 22;
@@ -88,10 +88,10 @@ public class MapController {
 
         multiplier = 32 / (roomSize + 4f);
 
-        Utils.log("Calibration finished");
-        Utils.log("  startCorner: " + Arrays.toString(startCorner));
-        Utils.log("  roomSize: " + roomSize);
-        Utils.log("  multiplier: " + multiplier);
+        //Utils.log("Calibration finished");
+        //Utils.log("  startCorner: " + Arrays.toString(startCorner));
+        //Utils.log("  roomSize: " + roomSize);
+        //Utils.log("  multiplier: " + multiplier);
     }
 
     public static void loadRooms() {
@@ -139,7 +139,7 @@ public class MapController {
     }
 
     public static void scan() {
-        Utils.log("Beginning scan");
+        //Utils.log("Beginning scan");
         try {
             lastScan = System.currentTimeMillis();
             new Thread(() -> {
@@ -181,7 +181,7 @@ public class MapController {
         if(mapData == null) return;
         byte[] mapColors = mapData.colors;
 
-        Utils.log("Updating room statuses");
+        //Utils.log("Updating room statuses");
 
         int startX = startCorner[0] + Math.floorDiv(roomSize, 2);
         int startZ = startCorner[1] + Math.floorDiv(roomSize, 2);
@@ -198,7 +198,7 @@ public class MapController {
                 if(tile == null) continue;
 
                 int color = Byte.toUnsignedInt(mapColors[(mapY << 7) + mapX]);
-                // if(color != 0) Utils.log("Color is " + color);
+                // if(color != 0) //Utils.log("Color is " + color);
 
                 switch(color) {
                     case 0: // Transparent

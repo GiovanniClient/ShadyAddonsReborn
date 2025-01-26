@@ -214,7 +214,7 @@ public class DungeonUtils {
             }
         } catch(Exception exception) {
             exception.printStackTrace();
-            Utils.sendModMessage("&cException in class DungeonUtils");
+            Utils.out("&cException in class DungeonUtils");
         }
     }
 
@@ -241,13 +241,13 @@ public class DungeonUtils {
 
     public static void debug() {
         if(Utils.inDungeon) {
-            Utils.sendModMessage("Floor: " + floor.name());
-            Utils.sendModMessage("In Boss: " + inBoss);
-            Utils.sendModMessage("Secrets Found: " + secretsFound);
-            Utils.sendModMessage("Crypts Found: " + cryptsFound);
-            Utils.sendModMessage("Team:");
+            Utils.out("Floor: " + floor.name());
+            Utils.out("In Boss: " + inBoss);
+            Utils.out("Secrets Found: " + secretsFound);
+            Utils.out("Crypts Found: " + cryptsFound);
+            Utils.out("Team:");
             for(EntityPlayer teammate : teammates) {
-                Utils.sendModMessage("- " + teammate.getName());
+                Utils.out("- " + teammate.getName());
             }
         } else {
             Utils.sendMessage("You must be in a dungeon to debug a dungeon!");

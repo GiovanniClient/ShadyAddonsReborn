@@ -36,7 +36,7 @@ public class DisplayNotificationAction extends Action {
             } catch (IOException e) {}
         }
         else {
-            Utils.sendModMessage("§e" + message);
+            Utils.out("§e" + message);
             Utils.sendMessage("§oNotifications are only supported on macOS/Linux for now");
         }
     }

@@ -148,7 +148,7 @@ public class ItemMacro {
     }
 
     private static void sendMissingItemMessage(String itemName) {
-        Utils.sendModMessage("No &9"+itemName+"&r found in your hotbar");
+        Utils.out("No &9"+itemName+"&r found in your hotbar");
     }
 
 }

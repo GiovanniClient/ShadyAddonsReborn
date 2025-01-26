@@ -37,7 +37,7 @@ public class MapScanner {
 
                 // TODO: Test and possibly allow for partial scans
                 if(!Shady.mc.theWorld.getChunkFromChunkCoords(x >> 4, z >> 4).isLoaded()) {
-                    Utils.log("Chunk at x" + x + " z" + z + "is not loaded");
+                    //Utils.log("Chunk at x" + x + " z" + z + "is not loaded");
                     map.allLoaded = false;
                 }
 

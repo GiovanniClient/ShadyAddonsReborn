@@ -21,11 +21,11 @@ public class RoutinesAPI {
                     Routines.load();
 
                     if(Shady.mc.theWorld != null) {
-                        Utils.sendModMessage("&aInstalled and loaded routine!");
+                        Utils.out("&aInstalled and loaded routine!");
                     }
                 } else {
                     if(Shady.mc.theWorld != null) {
-                        Utils.sendModMessage("&cA routine with that ID does not exist!");
+                        Utils.out("&cA routine with that ID does not exist!");
                     }
                 }
             } catch(Exception ignored) {}

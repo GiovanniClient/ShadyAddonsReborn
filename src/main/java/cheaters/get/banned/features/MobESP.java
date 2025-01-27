@@ -110,7 +110,7 @@ public class MobESP {
             }
         }
 
-        if(FolderSetting.isEnabled("Mob ESP") && !highlightedEntities.isEmpty() && highlightedEntities.containsKey(event.entity)) {
+        if(FolderSetting.isEnabled("ESP - Mobs") && !highlightedEntities.isEmpty() && highlightedEntities.containsKey(event.entity)) {
             OutlineUtils.outlineEntity(event, highlightedEntities.get(event.entity));
         }
     }

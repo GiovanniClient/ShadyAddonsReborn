@@ -206,211 +206,208 @@ public class Config {
 
     @Property(
             type = Property.Type.FOLDER,
-            name = "Show Hidden Mobs"
+            name = "Show Hidden Stuff"
     )
     public static boolean showHiddenMobs = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Shadow Assassins",
-                parent = "Show Hidden Mobs"
+                parent = "Show Hidden Stuff"
         )
         public static boolean showHiddenShadowAssassins = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Fels",
-                parent = "Show Hidden Mobs"
+                parent = "Show Hidden Stuff"
         )
         public static boolean showHiddenFels = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Ghosts",
-                parent = "Show Hidden Mobs"
+                parent = "Show Hidden Stuff"
         )
         public static boolean showGhosts = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Stealthy Blood Mobs",
-                parent = "Show Hidden Mobs"
+                parent = "Show Hidden Stuff"
         )
         public static boolean showStealthyBloodMobs = false;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Sneaky Creepers",
-                parent = "Show Hidden Mobs"
+                parent = "Show Hidden Stuff"
         )
         public static boolean showSneakyCreepers = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Barrier Blocks",
+                note = "makes it glass",
+                parent = "Show Hidden Stuff"
+        )
+    public static boolean barriersEsp = false;
+    // end Show Hidden Stuff
 
 
     @Property(
             type = Property.Type.FOLDER,
-            name = "Mob ESP",
+            name = "ESP - Mobs",
             note = "type /patcher -> disable entity culling"
     )
     public static boolean mobEsp = false;
-
-    @Property(
-            type = Property.Type.NUMBER,
-            name = "Outline Thickness",
-            parent = "Mob ESP",
-            min = 3,
-            max = 10,
-            suffix = "px"
-    )
-    public static int espThickness = 5;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Mineshaft Corpses",
-            parent = "Mob ESP"
-    )
-    public static boolean glaciteCorpses = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Sludges",
-            parent = "Mob ESP"
-    )
-    public static boolean sludgeEsp = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Yogs",
-            parent = "Mob ESP"
-    )
-    public static boolean yogEsp = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Corleone",
-            parent = "Mob ESP"
-    )
-    public static boolean corleoneEsp = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Starred Mobs",
-            parent = "Mob ESP"
-    )
-    public static boolean starredMobEsp = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Secret Bats",
-            parent = "Mob ESP"
-    )
-    public static boolean secretBatEsp = false;
-
-    @Property(
-            type = Property.Type.CHECKBOX,
-            name = "Minibosses",
-            parent = "Mob ESP"
-    )
-    public static boolean minibossEsp = false;
-
+        @Property(
+                type = Property.Type.NUMBER,
+                name = "Outline Thickness",
+                parent = "ESP - Mobs",
+                min = 3,
+                max = 10,
+                suffix = "px"
+        )
+        public static int espThickness = 5;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Mineshaft Corpses",
+                parent = "ESP - Mobs"
+        )
+        public static boolean glaciteCorpses = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Sludges",
+                parent = "ESP - Mobs",
+                note = "bugged"
+        )
+        public static boolean sludgeEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Yogs",
+                parent = "ESP - Mobs",
+                note = "bugged"
+        )
+        public static boolean yogEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Corleone",
+                parent = "ESP - Mobs",
+                note = "bugged (maybe?)"
+        )
+        public static boolean corleoneEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Starred Mobs",
+                parent = "ESP - Mobs",
+                note = "bugged"
+        )
+        public static boolean starredMobEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Secret Bats",
+                parent = "ESP - Mobs",
+                note = "probably bugged"
+        )
+        public static boolean secretBatEsp = false;
+        @Property(
+                type = Property.Type.CHECKBOX,
+                name = "Minibosses",
+                parent = "ESP - Mobs",
+                note = "bugged"
+        )
+        public static boolean minibossEsp = false;
+    // end ESP - Mobs
 
     @Property(
             type = Property.Type.FOLDER,
-            name = "Gemstone ESP"
+            name = "ESP - Gemstones"
     )
     public static boolean gemstoneEsp = false;
-
         @Property(
                 type = Property.Type.BOOLEAN,
                 name = "Include Glass Panes",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean includeGlassPanes = false;
-
         @Property(
                 type = Property.Type.SELECT,
                 name = "Highlight Mode",
-                parent = "Gemstone ESP",
+                parent = "ESP - Gemstones",
                 options = {"Outlined", "Filled"}
         )
         public static int highlightMode = 0;
-
         @Property(
                 type = Property.Type.NUMBER,
             name = "Scan Radius",
-                parent = "Gemstone ESP",
+                parent = "ESP - Gemstones",
                 suffix = " blocks",
                 min = 5,
                 max = 30
         )
         public static int gemstoneRadius = 15;
-
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Ruby",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean rubyEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Amber",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean amberEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Sapphire",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean sapphireEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Jade",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean jadeEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Amethyst",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean amethystEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Topaz",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean topazEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Jasper",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean jasperEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Onyx",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean onyxEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Peridot",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean peridotEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Aquamarine",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean aquamarineEsp = false;
         @Property(
                 type = Property.Type.CHECKBOX,
                 name = "Citrine",
-                parent = "Gemstone ESP"
+                parent = "ESP - Gemstones"
         )
         public static boolean citrineEsp = false;
-
+    // end ESP - Gemstones
 
     @Property(
             type = Property.Type.BOOLEAN,

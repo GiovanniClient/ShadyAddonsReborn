@@ -25,7 +25,7 @@ import java.io.IOException;
  * @see Main
  */
 @Command(value = Shady.MOD_ID, description = "Access the " + Shady.MOD_NAME + " GUI.",
-        aliases = {"sh", "shady", "gio", "giova", "gcl", "giovanni", "giovanniclient"})
+        aliases = {"sh", "shr", "shady", "shadyreborn", "shadyaddonsreborn", "gio", "giova", "gcl", "giovanni", "giovanniclient"})
 public class NewCommand {
     private static final String UNKNOWN_COMMAND = "Unrecognized command!";
     private static final String INVALID_ARGUMENTS = "Invalid arguments!";

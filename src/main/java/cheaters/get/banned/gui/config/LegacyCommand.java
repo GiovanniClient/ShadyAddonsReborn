@@ -21,9 +21,12 @@ public class LegacyCommand extends CommandBase {
     @Override
     public List<String> getCommandAliases() {
         return new ArrayList<String>(){{
+            add("lshr");
             add("legacysh");
+            add("legacyshr");
             add("legacyshady");
             add("legacyshadyaddons");
+            add("legacyshadyaddonsreborn");
         }};
     }
 

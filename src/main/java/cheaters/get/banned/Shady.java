@@ -1,5 +1,6 @@
 package cheaters.get.banned;
 
+import cc.polyfrost.oneconfig.utils.commands.CommandManager;
 import cheaters.get.banned.events.MinuteEvent;
 import cheaters.get.banned.events.TickEndEvent;
 import cheaters.get.banned.features.*;
@@ -10,10 +11,11 @@ import cheaters.get.banned.features.routines.RoutineHooks;
 import cheaters.get.banned.features.routines.Routines;
 import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.gui.config.ConfigLogic;
-import cheaters.get.banned.gui.config.MainCommand;
+import cheaters.get.banned.gui.config.LegacyCommand;
 import cheaters.get.banned.gui.config.settings.BooleanSetting;
 import cheaters.get.banned.gui.config.settings.SelectSetting;
 import cheaters.get.banned.gui.config.settings.Setting;
+import cheaters.get.banned.gui.polyconfig.NewCommand;
 import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.remote.DisableFeatures;
 import cheaters.get.banned.remote.UpdateGui;
@@ -55,6 +57,7 @@ public class Shady {
     public static final String VERSION = "@VER@";
     public static final boolean BETA = VERSION.contains("-pre") || VERSION.equals("@VER"+"SION@");
 
+    // polyfrost stuff
     public static PolyfrostConfig polyfrostConfig;
 
     public static final Minecraft mc = Minecraft.getMinecraft();
@@ -77,8 +80,7 @@ public class Shady {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         if(!dir.exists()) dir.mkdirs();
-
-        ClientCommandHandler.instance.registerCommand(new MainCommand());
+        ClientCommandHandler.instance.registerCommand(new LegacyCommand());
 
         EstonianUtils.loadEstonian();
         settings = ConfigLogic.collect(Config.class, DisableFeatures.load());
@@ -96,6 +98,7 @@ public class Shady {
     @Mod.EventHandler
     public void onInit(FMLInitializationEvent event) {
         polyfrostConfig = new PolyfrostConfig();
+        CommandManager.INSTANCE.registerCommand(new NewCommand());
 
         MinecraftForge.EVENT_BUS.register(new TickEndEvent());
         MinecraftForge.EVENT_BUS.register(this);
@@ -186,6 +189,7 @@ public class Shady {
         MiscStats.minutesSinceLastSend++;
     }
 
+    // this is used to display the /shady menu
     @SubscribeEvent
     public void onTick(TickEndEvent event) {
         if(guiToOpen != null) {

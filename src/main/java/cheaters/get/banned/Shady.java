@@ -14,6 +14,7 @@ import cheaters.get.banned.gui.config.MainCommand;
 import cheaters.get.banned.gui.config.settings.BooleanSetting;
 import cheaters.get.banned.gui.config.settings.SelectSetting;
 import cheaters.get.banned.gui.config.settings.Setting;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.remote.DisableFeatures;
 import cheaters.get.banned.remote.UpdateGui;
 import cheaters.get.banned.remote.Updater;
@@ -23,7 +24,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -46,13 +46,16 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-@Mod(modid = Shady.MOD_ID, name = Shady.MOD_NAME, version = "4.1.3", clientSideOnly = true)
+@Mod(modid = Shady.MOD_ID, name = Shady.MOD_NAME, version = "@VER@", clientSideOnly = true)
 public class Shady {
 
-    public static final String MOD_NAME = "Subtitles Mod";
-    public static final String MOD_ID = "subtitles_mod";
-    public static final String VERSION = "@VERSION@";
+    // Sets the variables from `gradle.properties`. See the `blossom` config in `build.gradle.kts`.
+    public static final String MOD_ID = "@ID@";
+    public static final String MOD_NAME = "@NAME@";
+    public static final String VERSION = "@VER@";
     public static final boolean BETA = VERSION.contains("-pre") || VERSION.equals("@VER"+"SION@");
+
+    public static PolyfrostConfig polyfrostConfig;
 
     public static final Minecraft mc = Minecraft.getMinecraft();
     public static boolean shouldCrash = false;
@@ -91,7 +94,9 @@ public class Shady {
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+    public void onInit(FMLInitializationEvent event) {
+        polyfrostConfig = new PolyfrostConfig();
+
         MinecraftForge.EVENT_BUS.register(new TickEndEvent());
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new Utils());

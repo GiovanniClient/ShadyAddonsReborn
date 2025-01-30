@@ -3,6 +3,7 @@ package cheaters.get.banned.features;
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.events.TickEndEvent;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.NetworkUtils;
 import cheaters.get.banned.utils.Utils;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
@@ -36,7 +37,7 @@ public class DisableSwordAnimation {
 
     @SubscribeEvent
     public void onInteract(PlayerInteractEvent event) {
-        if(Config.disableBlockAnimation && event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
+        if(PolyfrostConfig.disableBlockAnimation && event.action == PlayerInteractEvent.Action.RIGHT_CLICK_AIR) {
             if(Shady.mc.thePlayer.getHeldItem() != null) {
                 String itemID = Utils.getSkyBlockID(Shady.mc.thePlayer.getHeldItem());
                 if(swords.contains(itemID)) {

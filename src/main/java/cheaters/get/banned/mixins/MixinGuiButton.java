@@ -1,6 +1,7 @@
 package cheaters.get.banned.mixins;
 
 import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.FontUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -27,7 +28,7 @@ public abstract class MixinGuiButton {
 
     @Inject(method = "drawButton", at = @At("HEAD"), cancellable = true)
     public void drawCleanButton(Minecraft mc, int mouseX, int mouseY, CallbackInfo callbackInfo) {
-        if(Config.useCleanButtons) {
+        if(PolyfrostConfig.useCleanButtons) {
             if(visible) {
                 hovered = mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition+width && mouseY < yPosition+height;
                 Color color = hovered ? new Color(30, 30, 30, 64) : new Color(0, 0, 0, 64);

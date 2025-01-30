@@ -3,8 +3,7 @@ package cheaters.get.banned.features;
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.events.BlockChangeEvent;
 import cheaters.get.banned.events.TickEndEvent;
-import cheaters.get.banned.gui.config.Config;
-import cheaters.get.banned.gui.config.settings.FolderSetting;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.RenderUtils;
 import cheaters.get.banned.utils.Utils;
@@ -22,6 +21,8 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.*;
 
 public class GemstoneESP {
 
@@ -80,9 +81,9 @@ public class GemstoneESP {
                 BlockPos playerPosition = Shady.mc.thePlayer.getPosition();
                 lastChecked = playerPosition;
 
-                for(int x = playerPosition.getX()-Config.gemstoneRadius; x < playerPosition.getX()+Config.gemstoneRadius; x++) {
-                    for(int y = playerPosition.getY()-Config.gemstoneRadius; y < playerPosition.getY()+Config.gemstoneRadius; y++) {
-                        for(int z = playerPosition.getZ()-Config.gemstoneRadius; z < playerPosition.getZ()+Config.gemstoneRadius; z++) {
+                for(int x = playerPosition.getX()- PolyfrostConfig.gemstoneRadius; x < playerPosition.getX()+PolyfrostConfig.gemstoneRadius; x++) {
+                    for(int y = playerPosition.getY()-PolyfrostConfig.gemstoneRadius; y < playerPosition.getY()+PolyfrostConfig.gemstoneRadius; y++) {
+                        for(int z = playerPosition.getZ()-PolyfrostConfig.gemstoneRadius; z < playerPosition.getZ()+PolyfrostConfig.gemstoneRadius; z++) {
 
                             BlockPos position = new BlockPos(x, y, z);
 
@@ -115,9 +116,9 @@ public class GemstoneESP {
             for(Map.Entry<BlockPos, Gemstone> gemstone : gemstones.entrySet()) {
                 if(!isGemstoneEnabled(gemstone.getValue())) continue;
                 double distanceSq = gemstone.getKey().distanceSq(Shady.mc.thePlayer.posX, Shady.mc.thePlayer.posY, Shady.mc.thePlayer.posZ);
-                if(distanceSq > Math.pow(Config.gemstoneRadius + 2, 2)) continue;
+                if(distanceSq > Math.pow(PolyfrostConfig.gemstoneRadius + 2, 2)) continue;
 
-                if(Config.highlightMode == 0) { // Outlined
+                if(PolyfrostConfig.highlightMode == 0) { // Outlined
                     RenderUtils.outlineBlock(gemstone.getKey(), gemstone.getValue().color, event.partialTicks);
                 } else { // Filled
                     RenderUtils.highlightBlock(gemstone.getKey(), gemstone.getValue().color, event.partialTicks);
@@ -129,7 +130,7 @@ public class GemstoneESP {
     private static boolean isEnabled() {
         return Shady.mc.thePlayer != null &&
                 Shady.mc.theWorld != null &&
-                FolderSetting.isEnabled("Gemstone ESP") &&
+                isAnyGemstoneEspEnabled() &&
                 Utils.inSkyBlock &&
                 (LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS) || LocationUtils.onIsland(LocationUtils.Island.DWARVEN_MINES));
     }
@@ -156,57 +157,57 @@ public class GemstoneESP {
     }
 
     private static boolean isGemstoneEnabled(Gemstone gemstone) {
-        if(Config.includeGlassPanes) {
+        if(PolyfrostConfig.includeGlassPanes) {
             switch(gemstone) {
                 case RUBY_SHARD:
-                    return Config.rubyEsp;
+                    return PolyfrostConfig.rubyEsp;
                 case AMETHYST_SHARD:
-                    return Config.amethystEsp;
+                    return PolyfrostConfig.amethystEsp;
                 case JADE_SHARD:
-                    return Config.jadeEsp;
+                    return PolyfrostConfig.jadeEsp;
                 case SAPPHIRE_SHARD:
-                    return Config.sapphireEsp;
+                    return PolyfrostConfig.sapphireEsp;
                 case AMBER_SHARD:
-                    return Config.amberEsp;
+                    return PolyfrostConfig.amberEsp;
                 case TOPAZ_SHARD:
-                    return Config.topazEsp;
+                    return PolyfrostConfig.topazEsp;
                 case JASPER_SHARD:
-                    return Config.jasperEsp;
+                    return PolyfrostConfig.jasperEsp;
 
                 case ONYX_SHARD:
-                    return Config.onyxEsp;
+                    return PolyfrostConfig.onyxEsp;
                 case PERIDOT_SHARD:
-                    return Config.peridotEsp;
+                    return PolyfrostConfig.peridotEsp;
                 case AQUAMARINE_SHARD:
-                    return Config.aquamarineEsp;
+                    return PolyfrostConfig.aquamarineEsp;
                 case CITRINE_SHARD:
-                    return Config.citrineEsp;
+                    return citrineEsp;
             }
         }
 
         switch(gemstone) {
             case RUBY:
-                return Config.rubyEsp;
+                return PolyfrostConfig.rubyEsp;
             case AMETHYST:
-                return Config.amethystEsp;
+                return PolyfrostConfig.amethystEsp;
             case JADE:
-                return Config.jadeEsp;
+                return PolyfrostConfig.jadeEsp;
             case SAPPHIRE:
-                return Config.sapphireEsp;
+                return PolyfrostConfig.sapphireEsp;
             case AMBER:
-                return Config.amberEsp;
+                return PolyfrostConfig.amberEsp;
             case TOPAZ:
-                return Config.topazEsp;
+                return PolyfrostConfig.topazEsp;
             case JASPER:
-                return Config.jasperEsp;
+                return PolyfrostConfig.jasperEsp;
             case ONYX:
-                return Config.onyxEsp;
+                return PolyfrostConfig.onyxEsp;
             case PERIDOT:
-                return Config.peridotEsp;
+                return PolyfrostConfig.peridotEsp;
             case AQUAMARINE:
-                return Config.aquamarineEsp;
+                return PolyfrostConfig.aquamarineEsp;
             case CITRINE:
-                return Config.citrineEsp;
+                return citrineEsp;
             default:
                 return false;
         }
@@ -218,5 +219,10 @@ public class GemstoneESP {
         checked.clear();
         lastChecked = null;
     }
+
+    public static boolean isAnyGemstoneEspEnabled() {
+        return rubyEsp || amberEsp || sapphireEsp || jadeEsp || amethystEsp || topazEsp || jasperEsp || onyxEsp || peridotEsp || aquamarineEsp || citrineEsp;
+    }
+
 
 }

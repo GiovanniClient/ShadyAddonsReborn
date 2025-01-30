@@ -1,8 +1,7 @@
 package cheaters.get.banned.features;
 
 import cheaters.get.banned.events.RenderEntityModelEvent;
-import cheaters.get.banned.gui.config.Config;
-import cheaters.get.banned.gui.config.settings.FolderSetting;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.OutlineUtils;
 import cheaters.get.banned.utils.Utils;
@@ -22,6 +21,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
+import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.*;
+
 public class MobESP {
 
     private static HashMap<Entity, Color> highlightedEntities = new HashMap<>();
@@ -34,7 +35,7 @@ public class MobESP {
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if(Utils.inDungeon) {
-            if(Config.minibossEsp && event.entity instanceof EntityPlayer) {
+            if(PolyfrostConfig.minibossEsp && event.entity instanceof EntityPlayer) {
                 String name = event.entity.getName();
                 switch(name) {
                     case "Shadow Assassin":
@@ -52,25 +53,25 @@ public class MobESP {
                 }
             }
 
-            if(Config.secretBatEsp && event.entity instanceof EntityBat) {
+            if(PolyfrostConfig.secretBatEsp && event.entity instanceof EntityBat) {
                 highlightEntity(event.entity, Color.RED);
             }
         }
 
         if(Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
-            if(Config.sludgeEsp) {
+            if(PolyfrostConfig.sludgeEsp) {
                 if(event.entity instanceof EntitySlime && !(event.entity instanceof EntityMagmaCube)) {
                     highlightEntity(event.entity, Color.GREEN);
                 }
             }
 
-            if(Config.yogEsp) {
+            if(PolyfrostConfig.yogEsp) {
                 if(event.entity instanceof EntityMagmaCube) {
                     highlightEntity(event.entity, Color.RED);
                 }
             }
 
-            if(Config.corleoneEsp) {
+            if(PolyfrostConfig.corleoneEsp) {
                 if(event.entity instanceof EntityOtherPlayerMP && event.entity.getName().equals("Team Treasurite")) {
                     float health = ((EntityOtherPlayerMP) event.entity).getMaxHealth();
                     if(health == 1_000_000 || health == 2_000_000) {
@@ -83,7 +84,7 @@ public class MobESP {
 
     @SubscribeEvent
     public void onRenderEntityModel(RenderEntityModelEvent event) {
-        if(Config.glaciteCorpses && LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+        if(PolyfrostConfig.glaciteCorpses && LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
             if(event.entity instanceof EntityArmorStand) {
                 EntityArmorStand armorStand = (EntityArmorStand) event.entity;
                 if (armorStand.getShowArms()) {
@@ -93,12 +94,12 @@ public class MobESP {
                 // (by checking their outfit) tho i think i'm too skill issued to pull it off
             }
         }
-        if(Config.glaciteCorpses && !LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+        if(PolyfrostConfig.glaciteCorpses && !LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
             highlightedEntities.clear(); // for some reason, onWorldLoad isn't always clearing it, so...
         }
 
 
-        if(Utils.inDungeon && !checkedStarNameTags.contains(event.entity) && Config.starredMobEsp) {
+        if(Utils.inDungeon && !checkedStarNameTags.contains(event.entity) && PolyfrostConfig.starredMobEsp) {
             if(event.entity instanceof EntityArmorStand) {
                 if(event.entity.hasCustomName() && event.entity.getCustomNameTag().contains("✯")) {
                     List<Entity> possibleEntities = event.entity.getEntityWorld().getEntitiesInAABBexcluding(event.entity, event.entity.getEntityBoundingBox().expand(0, 3, 0), entity -> !(entity instanceof EntityArmorStand));
@@ -110,7 +111,7 @@ public class MobESP {
             }
         }
 
-        if(FolderSetting.isEnabled("ESP - Mobs") && !highlightedEntities.isEmpty() && highlightedEntities.containsKey(event.entity)) {
+        if(isAnyEspEnabled() && !highlightedEntities.isEmpty() && highlightedEntities.containsKey(event.entity)) {
             OutlineUtils.outlineEntity(event, highlightedEntities.get(event.entity));
         }
     }
@@ -121,4 +122,7 @@ public class MobESP {
         checkedStarNameTags.clear();
     }
 
+    public static boolean isAnyEspEnabled() {
+        return glaciteCorpses || sludgeEsp || yogEsp || corleoneEsp || starredMobEsp || secretBatEsp || minibossEsp;
+    }
 }

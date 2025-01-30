@@ -2,6 +2,7 @@ package cheaters.get.banned.features;
 
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.TabUtils;
 import cheaters.get.banned.utils.Utils;
@@ -38,7 +39,7 @@ public class JungleCheddar {
      */
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (Config.jungleCheddar && Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
+        if (PolyfrostConfig.jungleCheddar && Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
 
             // running every 5 seconds, no need to run at 20hz
             if (tickCooldown < 100) {

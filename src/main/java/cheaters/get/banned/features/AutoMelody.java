@@ -3,6 +3,7 @@ package cheaters.get.banned.features;
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.events.TickEndEvent;
 import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.Utils;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.init.Blocks;
@@ -41,7 +42,7 @@ public class AutoMelody {
     public void onTick(TickEndEvent event) {
         counter++;
         if (counter % 2 == 0) return;
-        if(!inHarp || !Config.autoMelody || Shady.mc.thePlayer == null) return;
+        if(!inHarp || !PolyfrostConfig.autoMelody || Shady.mc.thePlayer == null) return;
         String inventoryName = Utils.getInventoryName();
         if(inventoryName == null || !inventoryName.startsWith("Harp -")) inHarp = false;
 

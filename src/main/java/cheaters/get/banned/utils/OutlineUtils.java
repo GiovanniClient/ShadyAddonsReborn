@@ -1,8 +1,8 @@
 package cheaters.get.banned.utils;
 
 import cheaters.get.banned.Shady;
-import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.events.RenderEntityModelEvent;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,7 +32,7 @@ public class OutlineUtils {
         GlStateManager.resetColor();
         setColor(color);
 
-        renderOne(Config.espThickness);
+        renderOne(PolyfrostConfig.espThickness);
         model.render(
                 entity,
                 limbSwing,

@@ -6,7 +6,7 @@ import cheaters.get.banned.features.map.elements.doors.DoorTile;
 import cheaters.get.banned.features.map.elements.rooms.RoomTile;
 import cheaters.get.banned.features.map.elements.rooms.RoomType;
 import cheaters.get.banned.features.map.elements.rooms.Separator;
-import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.DungeonUtils;
 import cheaters.get.banned.utils.FontUtils;
 import cheaters.get.banned.utils.RenderUtils;
@@ -33,17 +33,17 @@ public class MapView {
     @SubscribeEvent
     public void onRenderOverlay(RenderGameOverlayEvent event) {
         if(event.type != RenderGameOverlayEvent.ElementType.HOTBAR) return;
-        if(MapController.scannedMap == null || !Utils.inDungeon || !Config.dungeonMap || DungeonUtils.inBoss) return;
+        if(MapController.scannedMap == null || !Utils.inDungeon || !PolyfrostConfig.dungeonMap || DungeonUtils.inBoss) return;
 
         // Scaling
-        float scale = Config.mapScale / 100f;
+        float scale = PolyfrostConfig.mapScale / 100f;
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
 
         // Positioning
         GlStateManager.translate(
-                Config.mapXOffset + (Config.mapBorder > 0 ? borderSize : 0),
-                Config.mapYOffset + (Config.mapBorder > 0 ? borderSize : 0),
+                PolyfrostConfig.mapXOffset + (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
+                PolyfrostConfig.mapYOffset + (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
                 0
         );
 
@@ -52,21 +52,21 @@ public class MapView {
                 0,
                 0,
                 maxMapPx + tileSize * 2,
-                maxMapPx + tileSize * 2 + (Config.showDungeonInfo ? 30 : 0),
-                Utils.addAlphaPct(Color.BLACK, Config.mapBackgroundOpacity / 100f).getRGB()
+                maxMapPx + tileSize * 2 + (PolyfrostConfig.showDungeonInfo ? 30 : 0),
+                Utils.addAlphaPct(Color.BLACK, PolyfrostConfig.mapBackgroundOpacity / 100f).getRGB()
         );
 
         // Draw Map Border
-        if(Config.mapBorder > 0) {
+        if(PolyfrostConfig.mapBorder > 0) {
             int borderColor = new int[]{
                     Color.TRANSLUCENT,
                     getChroma(),
                     Color.BLACK.getRGB(),
                     Color.WHITE.getRGB()
-            }[Config.mapBorder];
+            }[PolyfrostConfig.mapBorder];
 
             int mapWidth = maxMapPx + tileSize * 2;
-            int mapHeight = mapWidth + (Config.showDungeonInfo ? 30 : 0);
+            int mapHeight = mapWidth + (PolyfrostConfig.showDungeonInfo ? 30 : 0);
 
             // Top Border
             Gui.drawRect(
@@ -106,7 +106,7 @@ public class MapView {
         }
 
         // Draw Run Info
-        if(Config.showDungeonInfo) {
+        if(PolyfrostConfig.showDungeonInfo) {
             FontUtils.drawCenteredString(
                     String.format(
                             "Secrets: §a%d§7/%d §f   Crypts: §a%d\n§fDeaths: §%c%d §f   Score: §%c%d",
@@ -214,10 +214,10 @@ public class MapView {
         }
 
         // Draw Player Heads
-        if(Config.showMapPlayerHeads > 0) {
+        if(PolyfrostConfig.showMapPlayerHeads > 0) {
             int headSize = 14;
             for(EntityPlayer teammate : DungeonUtils.teammates) {
-                if(Config.showMapPlayerHeads == 2 && teammate != Shady.mc.thePlayer || teammate.isDead) continue; // Only render own head
+                if(PolyfrostConfig.showMapPlayerHeads == 2 && teammate != Shady.mc.thePlayer || teammate.isDead) continue; // Only render own head
 
                 int playerX = (int) ((teammate.getPosition().getX() - MapScanner.xCorner) / (float) maxMapBlocks * maxMapPx);
                 int playerZ = (int) ((teammate.getPosition().getZ() - MapScanner.zCorner) / (float) maxMapBlocks * maxMapPx);
@@ -229,8 +229,8 @@ public class MapView {
 
         GlStateManager.translate(-tileSize, -tileSize, 0); // Reset Padding
         GlStateManager.translate(
-                -Config.mapXOffset - (Config.mapBorder > 0 ? borderSize : 0),
-                -Config.mapYOffset - (Config.mapBorder > 0 ? borderSize : 0),
+                -PolyfrostConfig.mapXOffset - (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
+                -PolyfrostConfig.mapYOffset - (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
                 0
         ); // Reset Positioning
         GlStateManager.popMatrix(); // Reset Scaling
@@ -291,16 +291,16 @@ public class MapView {
     }
 
     private static void drawRoomName(RoomTile roomTile, int x, int y) {
-        if(Config.showRoomNames == 0) return;
+        if(PolyfrostConfig.showRoomNames == 0) return;
 
         String name = null;
 
-        if(Config.showRoomNames == 1) { // Important
+        if(PolyfrostConfig.showRoomNames == 1) { // Important
             if(roomTile.room.type == RoomType.YELLOW || roomTile.room.type == RoomType.PUZZLE || roomTile.room.type == RoomType.TRAP) {
                 name = RoomLists.shortNames.get(roomTile.room.name);
                 if(name == null) name = roomTile.room.name.replace(" ", "\n");
             }
-        } else if(Config.showRoomNames == 2) { // All
+        } else if(PolyfrostConfig.showRoomNames == 2) { // All
             if(roomNamesDrawn.contains(roomTile.room.name)) return;
             name = roomTile.room.name.replace(" ", "\n");
             roomNamesDrawn.add(roomTile.room.name);

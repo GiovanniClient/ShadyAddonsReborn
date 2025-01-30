@@ -9,7 +9,7 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static cheaters.get.banned.gui.config.Config.barriersEsp;
+import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.barriersEsp;
 
 
 public class BarrierESP {

@@ -3,6 +3,7 @@ package cheaters.get.banned.features;
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.events.TickEndEvent;
 import cheaters.get.banned.gui.config.Config;
+import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.Utils;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ContainerChest;
@@ -60,7 +61,7 @@ public class AutoExperiments {
 
     @SubscribeEvent
     public void onTick(TickEndEvent event) {
-        if (currentExperiment == ExperimentType.NONE || !Config.autoExperiments || Shady.mc.thePlayer == null) return;
+        if (currentExperiment == ExperimentType.NONE || !PolyfrostConfig.autoExperiments || Shady.mc.thePlayer == null) return;
 
         if (startCooldown == 0)
             endCooldown = new Random().nextInt(10) + 5;

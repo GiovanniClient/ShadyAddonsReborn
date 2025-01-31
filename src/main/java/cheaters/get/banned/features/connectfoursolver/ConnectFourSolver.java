@@ -26,10 +26,10 @@ public class ConnectFourSolver {
 
     private boolean calculating = false;
     private int solutionSlot = -1;
-
     private boolean isOurTurn = false;
     private boolean inGame = false;
     private Thread thread = null;
+    private volatile boolean shouldStop = false; // Flag for safe thread termination
 
     private static final int EMPTY = 0;
     private static final int COMPUTER = 1;
@@ -37,11 +37,11 @@ public class ConnectFourSolver {
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
-        if(Config.connectFourAI && Utils.inSkyBlock && event.type == 0) {
+        if (Config.connectFourAI && Utils.inSkyBlock && event.type == 0) {
             String message = event.message.getUnformattedText();
-            if(message.endsWith(" defeated you in Four in a Row!")) {
+            if (message.endsWith(" defeated you in Four in a Row!")) {
                 MiscStats.add(MiscStats.Metric.CONNECT_FOUR_LOSSES);
-            } else if(message.startsWith("You defeated ") && message.endsWith(" in Four in a Row!")) {
+            } else if (message.startsWith("You defeated ") && message.endsWith(" in Four in a Row!")) {
                 MiscStats.add(MiscStats.Metric.CONNECT_FOUR_WINS);
             }
         }
@@ -49,31 +49,36 @@ public class ConnectFourSolver {
 
     @SubscribeEvent
     public void onTick(TickEndEvent event) {
-        if(Config.connectFourAI && Utils.inSkyBlock) {
+        if (Config.connectFourAI && Utils.inSkyBlock) {
             inGame = Shady.mc.currentScreen instanceof GuiChest && Utils.getInventoryName().startsWith("Four in a Row - ");
 
-            if(inGame) {
-                if(Shady.mc.thePlayer.openContainer.inventorySlots.get(1) != null) {
-                    if(Shady.mc.thePlayer.openContainer.inventorySlots.get(1).getStack() != null) {
+            if (inGame) {
+                if (Shady.mc.thePlayer.openContainer.inventorySlots.get(1) != null) {
+                    if (Shady.mc.thePlayer.openContainer.inventorySlots.get(1).getStack() != null) {
                         isOurTurn = Shady.mc.thePlayer.openContainer.inventorySlots.get(1).getStack().getItem() == Items.item_frame;
                     }
                 }
             }
 
-            if(!isOurTurn || !inGame) solutionSlot = -1;
-            if(!inGame && thread != null && thread.isAlive()) thread.stop(); // Forgive me Father for I have sinned
+            if (!isOurTurn || !inGame) solutionSlot = -1;
+            if (!inGame && thread != null && thread.isAlive()) {
+                shouldStop = true; // You are forgiven, Son.
+            }
 
-            if(isOurTurn && !calculating && inGame && solutionSlot == -1) {
+            if (isOurTurn && !calculating && inGame && solutionSlot == -1) {
                 calculating = true;
+                shouldStop = false; // Reset termination flag before starting a new thread
                 thread = new Thread(() -> {
                     ConnectFourAlgorithm.Board board = serializeInventory(Shady.mc.thePlayer.openContainer);
                     ConnectFourAlgorithm algorithm = new ConnectFourAlgorithm(board);
 
+                    if (shouldStop) return; // Exit thread if termination is requested
+
                     int column = algorithm.getAIMove();
                     algorithm.board.placeMove(column, COMPUTER);
 
-                    for(int row = 5; row >= 0; --row) {
-                        if(board.board[row][column] == 0) {
+                    for (int row = 5; row >= 0; --row) {
+                        if (board.board[row][column] == 0) {
                             solutionSlot = row * 9 + column + 1 + 9;
                             break;
                         }
@@ -87,8 +92,8 @@ public class ConnectFourSolver {
 
     private ConnectFourAlgorithm.Board serializeInventory(Container chest) {
         ConnectFourAlgorithm.Board board = new ConnectFourAlgorithm.Board();
-        for(Slot slot : chest.inventorySlots) {
-            if(slot.slotNumber > 53 ||
+        for (Slot slot : chest.inventorySlots) {
+            if (slot.slotNumber > 53 ||
                     slot.getStack() == null ||
                     slot.slotNumber % 9 == 0 ||
                     (slot.slotNumber + 1) % 9 == 0) continue; // Exclude 0th and 8th columns
@@ -97,12 +102,12 @@ public class ConnectFourSolver {
             int column = (slot.slotNumber - 1) % 9;
             Item item = slot.getStack().getItem();
 
-            if(item == Items.item_frame || item == Items.painting) {
+            if (item == Items.item_frame || item == Items.painting) {
                 board.board[row][column] = EMPTY;
             }
 
-            if(item == Item.getItemFromBlock(Blocks.stained_hardened_clay)) {
-                if(slot.getStack().getItemDamage() == 1) { // Orange
+            if (item == Item.getItemFromBlock(Blocks.stained_hardened_clay)) {
+                if (slot.getStack().getItemDamage() == 1) { // Orange
                     board.board[row][column] = OPPONENT;
                 } else { // Blue
                     board.board[row][column] = COMPUTER;
@@ -114,7 +119,7 @@ public class ConnectFourSolver {
 
     @SubscribeEvent
     public void onBackgroundRender(GuiScreenEvent.DrawScreenEvent.Pre event) {
-        if(Config.connectFourAI && Utils.inSkyBlock && inGame && calculating) {
+        if (Config.connectFourAI && Utils.inSkyBlock && inGame && calculating) {
             int y = event.gui.height / 2 - 105;
             int x = event.gui.width / 2 + 73;
             int textureX = (int) ((System.currentTimeMillis() / 10) % 20 * 8);
@@ -128,11 +133,10 @@ public class ConnectFourSolver {
 
     @SubscribeEvent
     public void onDrawSlot(DrawSlotEvent event) {
-        if(Config.connectFourAI && Utils.inSkyBlock && inGame && solutionSlot == event.slot.slotNumber) {
+        if (Config.connectFourAI && Utils.inSkyBlock && inGame && solutionSlot == event.slot.slotNumber) {
             int x = event.slot.xDisplayPosition;
             int y = event.slot.yDisplayPosition;
             Gui.drawRect(x, y, x + 16, y + 16, Color.GREEN.getRGB());
         }
     }
-
 }

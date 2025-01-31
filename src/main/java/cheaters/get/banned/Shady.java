@@ -129,18 +129,18 @@ public class Shady {
         //MinecraftForge.EVENT_BUS.register(new ItemMacro());
         MinecraftForge.EVENT_BUS.register(new MobESP());
         MinecraftForge.EVENT_BUS.register(new GemstoneESP());
-        // MinecraftForge.EVENT_BUS.register(new NewAutoTerminals());
+        //MinecraftForge.EVENT_BUS.register(new NewAutoTerminals());
         //MinecraftForge.EVENT_BUS.register(new AutoTerminals());
         MinecraftForge.EVENT_BUS.register(new AutoMelody());
         MinecraftForge.EVENT_BUS.register(new AutoExperiments());
         //MinecraftForge.EVENT_BUS.register(new AutoReadyUp());
-        // MinecraftForge.EVENT_BUS.register(new CrystalReach());
+        //MinecraftForge.EVENT_BUS.register(new CrystalReach());
         //MinecraftForge.EVENT_BUS.register(new AutoSalvage());
         //MinecraftForge.EVENT_BUS.register(new AutoSell());
         //MinecraftForge.EVENT_BUS.register(new SocialCommandSolver());
         //MinecraftForge.EVENT_BUS.register(new ConnectFourSolver());
         MinecraftForge.EVENT_BUS.register(new AutoWardrobe());
-        // MinecraftForge.EVENT_BUS.register(new CrystalEtherwarp());
+        //MinecraftForge.EVENT_BUS.register(new CrystalEtherwarp());
         //MinecraftForge.EVENT_BUS.register(new NoRotate());
         //MinecraftForge.EVENT_BUS.register(new AntiKB());
 
@@ -161,7 +161,7 @@ public class Shady {
         USING_SKYTILS = Loader.isModLoaded("skytils");
         USING_SBE = Loader.isModLoaded("skyblockextras");
 
-        //Capes.load(); // TODO: Figure out how to make this async
+        cheaters.get.banned.remote.Capes.load(); // TODO: Figure out how to make this async
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime firstRun = now.withSecond(0).plusMinutes(1);

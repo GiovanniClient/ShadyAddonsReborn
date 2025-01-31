@@ -35,6 +35,7 @@ public class Capes {
     public static ResourceLocation getCape(NetworkPlayerInfo player) {
         String userHash = DigestUtils.md5Hex(player.getGameProfile().getId().toString().replace("-", ""));
         String capeName = playerCapes.get(userHash);
+        // capeName= "veilleux_catgirl_anim"; little pirating was needed to update the PatchedGIFReader, aaaarg!
         if(capeName == null) return null;
 
         if(capeName.endsWith("_anim")) return getAnimatedCape(capeName);

@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Iterator;
 
+// When I first compiled your code, I saw all those warnings and cried a little
+// Now, now I feel much better
+
 public class PatchedGIFReader extends ImageReader {
 
     private final ImageReader gifReader;

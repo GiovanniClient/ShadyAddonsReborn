@@ -60,7 +60,7 @@ public class AutoExperiments {
 
     @SubscribeEvent
     public void onTick(TickEndEvent event) {
-        if (currentExperiment == ExperimentType.NONE || !PolyfrostConfig.autoExperiments || Shady.mc.thePlayer == null) return;
+        if (currentExperiment == ExperimentType.NONE || !PolyfrostConfig.AUTO_EXPERIMENTS || Shady.mc.thePlayer == null) return;
 
         ContainerChest container = (ContainerChest) Shady.mc.thePlayer.openContainer;
 
@@ -80,7 +80,7 @@ public class AutoExperiments {
                 if (container.getSlot(49).getStack().getItem().getUnlocalizedName().toUpperCase().contains("LIGHTGEM") &&
                         !container.getSlot(lastAdded).getStack().isItemEnchanted()) {
                     sequenceAdded = false;
-                    if (chronomatronOrder.size() > (11 - metaphysicalSerum)) {
+                    if (chronomatronOrder.size() > (11 - AE_METAPHYSICAL_SERUM)) {
                         Shady.mc.thePlayer.closeScreen();
                     }
                 }
@@ -103,7 +103,7 @@ public class AutoExperiments {
                         chronomatronOrder.size() > clicks) {
 
                     if (clickDelay == -1) {
-                        clickDelay =  rightNow + new Random().nextInt(CLICK_DELAY_MAX - CLICK_DELAY_MIN) + CLICK_DELAY_MIN;
+                        clickDelay =  rightNow + new Random().nextInt(AE_CLICK_DELAY_MAX - AE_CLICK_DELAY_MIN) + AE_CLICK_DELAY_MIN;
                         if (DEBUG) Utils.out("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
                     }
 
@@ -138,13 +138,13 @@ public class AutoExperiments {
                         ultrasequencerOrder.containsKey(clicks)) {
 
                     if (clickDelay == -1) {
-                        clickDelay =  rightNow + new Random().nextInt(CLICK_DELAY_MAX - CLICK_DELAY_MIN) + CLICK_DELAY_MIN;
+                        clickDelay =  rightNow + new Random().nextInt(AE_CLICK_DELAY_MAX - AE_CLICK_DELAY_MIN) + AE_CLICK_DELAY_MIN;
                         if (DEBUG) Utils.out("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
                     }
 
                     if (rightNow > clickDelay) {
                         // exits once we're done
-                        if (ultrasequencerOrder.size() > (9 - metaphysicalSerum))
+                        if (ultrasequencerOrder.size() > (9 - AE_METAPHYSICAL_SERUM))
                             Shady.mc.thePlayer.closeScreen();
 
                         Integer slotNumber = ultrasequencerOrder.get(clicks);
@@ -163,7 +163,7 @@ public class AutoExperiments {
                     if (DEBUG) Utils.out("End delay: " + (endDelay-rightNow) + "ms");
                 }
 
-                if (rightNow > endDelay && autoQuit) {
+                if (rightNow > endDelay && AE_AUTO_QUIT) {
                     // if (container.getSlot(11).getStack().getItem() == Items.skull) {
                     Shady.mc.thePlayer.closeScreen();
                     endDelay = -1;
@@ -177,7 +177,7 @@ public class AutoExperiments {
 
 
     private void clickSlot(int slot) {
-        Shady.mc.playerController.windowClick(Shady.mc.thePlayer.openContainer.windowId, slot, clickButton, clickMode, Shady.mc.thePlayer);
+        Shady.mc.playerController.windowClick(Shady.mc.thePlayer.openContainer.windowId, slot, AE_CLICK_BUTTON, AE_CLICK_MODE, Shady.mc.thePlayer);
     }
 
     private void clear() {

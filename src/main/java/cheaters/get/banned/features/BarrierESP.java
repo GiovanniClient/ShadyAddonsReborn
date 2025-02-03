@@ -9,13 +9,13 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
-import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.barriersEsp;
+import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.BARRIER_ESP;
 
 
 public class BarrierESP {
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event) {
-        if (barriersEsp) {
+        if (BARRIER_ESP) {
             if (event.phase != TickEvent.Phase.END) return;
 
             if (Shady.mc == null || Shady.mc.thePlayer == null || Shady.mc.theWorld == null)

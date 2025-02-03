@@ -35,7 +35,7 @@ public class MobESP {
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event) {
         if(Utils.inDungeon) {
-            if(PolyfrostConfig.minibossEsp && event.entity instanceof EntityPlayer) {
+            if(PolyfrostConfig.ESP_MINIBOSSES && event.entity instanceof EntityPlayer) {
                 String name = event.entity.getName();
                 switch(name) {
                     case "Shadow Assassin":
@@ -53,25 +53,25 @@ public class MobESP {
                 }
             }
 
-            if(PolyfrostConfig.secretBatEsp && event.entity instanceof EntityBat) {
+            if(PolyfrostConfig.ESP_SECRET_BAT && event.entity instanceof EntityBat) {
                 highlightEntity(event.entity, Color.RED);
             }
         }
 
         if(Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
-            if(PolyfrostConfig.sludgeEsp) {
+            if(PolyfrostConfig.ESP_SLUDGE) {
                 if(event.entity instanceof EntitySlime && !(event.entity instanceof EntityMagmaCube)) {
                     highlightEntity(event.entity, Color.GREEN);
                 }
             }
 
-            if(PolyfrostConfig.yogEsp) {
+            if(PolyfrostConfig.ESP_YOG) {
                 if(event.entity instanceof EntityMagmaCube) {
                     highlightEntity(event.entity, Color.RED);
                 }
             }
 
-            if(PolyfrostConfig.corleoneEsp) {
+            if(PolyfrostConfig.ESP_CORLEONE) {
                 if(event.entity instanceof EntityOtherPlayerMP && event.entity.getName().equals("Team Treasurite")) {
                     float health = ((EntityOtherPlayerMP) event.entity).getMaxHealth();
                     if(health == 1_000_000 || health == 2_000_000) {
@@ -84,7 +84,7 @@ public class MobESP {
 
     @SubscribeEvent
     public void onRenderEntityModel(RenderEntityModelEvent event) {
-        if(PolyfrostConfig.glaciteCorpses && LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+        if(PolyfrostConfig.ESP_GLACITE_CORPSES && LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
             if(event.entity instanceof EntityArmorStand) {
                 EntityArmorStand armorStand = (EntityArmorStand) event.entity;
                 if (armorStand.getShowArms()) {
@@ -94,12 +94,12 @@ public class MobESP {
                 // (by checking their outfit) tho i think i'm too skill issued to pull it off
             }
         }
-        if(PolyfrostConfig.glaciteCorpses && !LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
+        if(PolyfrostConfig.ESP_GLACITE_CORPSES && !LocationUtils.onIsland(LocationUtils.Island.GLACITE_MINESHAFTS)) {
             highlightedEntities.clear(); // for some reason, onWorldLoad isn't always clearing it, so...
         }
 
 
-        if(Utils.inDungeon && !checkedStarNameTags.contains(event.entity) && PolyfrostConfig.starredMobEsp) {
+        if(Utils.inDungeon && !checkedStarNameTags.contains(event.entity) && PolyfrostConfig.ESP_STARRED_MOBS) {
             if(event.entity instanceof EntityArmorStand) {
                 if(event.entity.hasCustomName() && event.entity.getCustomNameTag().contains("✯")) {
                     List<Entity> possibleEntities = event.entity.getEntityWorld().getEntitiesInAABBexcluding(event.entity, event.entity.getEntityBoundingBox().expand(0, 3, 0), entity -> !(entity instanceof EntityArmorStand));
@@ -123,6 +123,6 @@ public class MobESP {
     }
 
     public static boolean isAnyEspEnabled() {
-        return glaciteCorpses || sludgeEsp || yogEsp || corleoneEsp || starredMobEsp || secretBatEsp || minibossEsp;
+        return ESP_GLACITE_CORPSES || ESP_SLUDGE || ESP_YOG || ESP_CORLEONE || ESP_STARRED_MOBS || ESP_SECRET_BAT || ESP_MINIBOSSES;
     }
 }

@@ -15,7 +15,7 @@ public class MixinChat {
 
     @Inject(method = "<init>(Ljava/lang/String;)V", at = @At("RETURN"))
     private void modifyChatMessage(String message, CallbackInfo ci) {
-        if (PolyfrostConfig.fakeIronman && !message.startsWith("/")) {  // Skip commands if enabled
+        if (PolyfrostConfig.FAKE_IRONMAN && !message.startsWith("/")) {  // Skip commands if enabled
             this.message = "♲: " + message;
         }
     }

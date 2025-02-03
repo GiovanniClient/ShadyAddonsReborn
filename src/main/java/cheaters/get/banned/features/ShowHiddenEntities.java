@@ -16,16 +16,16 @@ public class ShowHiddenEntities {
     @SubscribeEvent
     public void onBeforeRenderEntity(RenderLivingEvent.Pre<EntityLivingBase> event) {
         if(event.entity.isInvisible()) {
-            if(PolyfrostConfig.showHiddenFels && event.entity instanceof EntityEnderman) {
+            if(PolyfrostConfig.SHOW_HIDDEN_FELS && event.entity instanceof EntityEnderman) {
                 event.entity.setInvisible(false);
             }
 
             if(Utils.inDungeon && event.entity instanceof EntityPlayer) {
-                if(PolyfrostConfig.showHiddenShadowAssassins && event.entity.getName().contains("Shadow Assassin")) {
+                if(PolyfrostConfig.SHOW_HIDDEN_SHADOW_ASS && event.entity.getName().contains("Shadow Assassin")) {
                     event.entity.setInvisible(false);
                 }
 
-                if(PolyfrostConfig.showStealthyBloodMobs) {
+                if(PolyfrostConfig.SHOW_STEALTHY_BLOOD_MOBS) {
                     for(String name : new String[]{"Revoker", "Psycho", "Reaper", "Cannibal", "Mute", "Ooze", "Putrid", "Freak", "Leech", "Tear", "Parasite", "Flamer", "Skull", "Mr. Dead", "Vader", "Frost", "Walker", "Wandering Soul", "Bonzo", "Scarf", "Livid"}) {
                         if(event.entity.getName().contains(name)) {
                             event.entity.setInvisible(false);
@@ -35,11 +35,11 @@ public class ShowHiddenEntities {
                 }
             }
 
-            if(PolyfrostConfig.showGhosts && event.entity instanceof EntityCreeper && ScoreboardUtils.scoreboardContains("The Mist")) {
+            if(PolyfrostConfig.SHOW_HIDDEN_GHOSTS && event.entity instanceof EntityCreeper && ScoreboardUtils.scoreboardContains("The Mist")) {
                 event.entity.setInvisible(false);
             }
 
-            if(PolyfrostConfig.showSneakyCreepers && event.entity instanceof EntityCreeper && LocationUtils.onIsland(LocationUtils.Island.DEEP_CAVERNS)) {
+            if(PolyfrostConfig.SHOW_SNEAKY_CREEPERS && event.entity instanceof EntityCreeper && LocationUtils.onIsland(LocationUtils.Island.DEEP_CAVERNS)) {
                 event.entity.setInvisible(false);
             }
         }

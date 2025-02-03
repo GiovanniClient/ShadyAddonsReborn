@@ -32,7 +32,7 @@ public class OutlineUtils {
         GlStateManager.resetColor();
         setColor(color);
 
-        renderOne(PolyfrostConfig.espThickness);
+        renderOne(PolyfrostConfig.ESP_THINKNESS);
         model.render(
                 entity,
                 limbSwing,

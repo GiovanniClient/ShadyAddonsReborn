@@ -33,17 +33,17 @@ public class MapView {
     @SubscribeEvent
     public void onRenderOverlay(RenderGameOverlayEvent event) {
         if(event.type != RenderGameOverlayEvent.ElementType.HOTBAR) return;
-        if(MapController.scannedMap == null || !Utils.inDungeon || !PolyfrostConfig.dungeonMap || DungeonUtils.inBoss) return;
+        if(MapController.scannedMap == null || !Utils.inDungeon || !PolyfrostConfig.MAP_DUNG_TOGGLE || DungeonUtils.inBoss) return;
 
         // Scaling
-        float scale = PolyfrostConfig.mapScale / 100f;
+        float scale = PolyfrostConfig.MAP_DUNG_SCALE / 100f;
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
 
         // Positioning
         GlStateManager.translate(
-                PolyfrostConfig.mapXOffset + (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
-                PolyfrostConfig.mapYOffset + (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
+                PolyfrostConfig.MAP_DUNG_X_OFFSET + (PolyfrostConfig.MAP_DUNG_BORDER_COLOR > 0 ? borderSize : 0),
+                PolyfrostConfig.MAP_DUNG_Y_OFFSET + (PolyfrostConfig.MAP_DUNG_BORDER_COLOR > 0 ? borderSize : 0),
                 0
         );
 
@@ -52,21 +52,21 @@ public class MapView {
                 0,
                 0,
                 maxMapPx + tileSize * 2,
-                maxMapPx + tileSize * 2 + (PolyfrostConfig.showDungeonInfo ? 30 : 0),
-                Utils.addAlphaPct(Color.BLACK, PolyfrostConfig.mapBackgroundOpacity / 100f).getRGB()
+                maxMapPx + tileSize * 2 + (PolyfrostConfig.MAP_DUNG_SHOW_INFO ? 30 : 0),
+                Utils.addAlphaPct(Color.BLACK, PolyfrostConfig.MAP_DUNG_BG_OPACITY / 100f).getRGB()
         );
 
         // Draw Map Border
-        if(PolyfrostConfig.mapBorder > 0) {
+        if(PolyfrostConfig.MAP_DUNG_BORDER_COLOR > 0) {
             int borderColor = new int[]{
                     Color.TRANSLUCENT,
                     getChroma(),
                     Color.BLACK.getRGB(),
                     Color.WHITE.getRGB()
-            }[PolyfrostConfig.mapBorder];
+            }[PolyfrostConfig.MAP_DUNG_BORDER_COLOR];
 
             int mapWidth = maxMapPx + tileSize * 2;
-            int mapHeight = mapWidth + (PolyfrostConfig.showDungeonInfo ? 30 : 0);
+            int mapHeight = mapWidth + (PolyfrostConfig.MAP_DUNG_SHOW_INFO ? 30 : 0);
 
             // Top Border
             Gui.drawRect(
@@ -106,7 +106,7 @@ public class MapView {
         }
 
         // Draw Run Info
-        if(PolyfrostConfig.showDungeonInfo) {
+        if(PolyfrostConfig.MAP_DUNG_SHOW_INFO) {
             FontUtils.drawCenteredString(
                     String.format(
                             "Secrets: §a%d§7/%d §f   Crypts: §a%d\n§fDeaths: §%c%d §f   Score: §%c%d",
@@ -214,10 +214,10 @@ public class MapView {
         }
 
         // Draw Player Heads
-        if(PolyfrostConfig.showMapPlayerHeads > 0) {
+        if(PolyfrostConfig.MAP_DUNG_SHOW_HEADS > 0) {
             int headSize = 14;
             for(EntityPlayer teammate : DungeonUtils.teammates) {
-                if(PolyfrostConfig.showMapPlayerHeads == 2 && teammate != Shady.mc.thePlayer || teammate.isDead) continue; // Only render own head
+                if(PolyfrostConfig.MAP_DUNG_SHOW_HEADS == 2 && teammate != Shady.mc.thePlayer || teammate.isDead) continue; // Only render own head
 
                 int playerX = (int) ((teammate.getPosition().getX() - MapScanner.xCorner) / (float) maxMapBlocks * maxMapPx);
                 int playerZ = (int) ((teammate.getPosition().getZ() - MapScanner.zCorner) / (float) maxMapBlocks * maxMapPx);
@@ -229,8 +229,8 @@ public class MapView {
 
         GlStateManager.translate(-tileSize, -tileSize, 0); // Reset Padding
         GlStateManager.translate(
-                -PolyfrostConfig.mapXOffset - (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
-                -PolyfrostConfig.mapYOffset - (PolyfrostConfig.mapBorder > 0 ? borderSize : 0),
+                -PolyfrostConfig.MAP_DUNG_X_OFFSET - (PolyfrostConfig.MAP_DUNG_BORDER_COLOR > 0 ? borderSize : 0),
+                -PolyfrostConfig.MAP_DUNG_Y_OFFSET - (PolyfrostConfig.MAP_DUNG_BORDER_COLOR > 0 ? borderSize : 0),
                 0
         ); // Reset Positioning
         GlStateManager.popMatrix(); // Reset Scaling
@@ -291,16 +291,16 @@ public class MapView {
     }
 
     private static void drawRoomName(RoomTile roomTile, int x, int y) {
-        if(PolyfrostConfig.showRoomNames == 0) return;
+        if(PolyfrostConfig.MAP_DUNG_ROOM_NAMES == 0) return;
 
         String name = null;
 
-        if(PolyfrostConfig.showRoomNames == 1) { // Important
+        if(PolyfrostConfig.MAP_DUNG_ROOM_NAMES == 1) { // Important
             if(roomTile.room.type == RoomType.YELLOW || roomTile.room.type == RoomType.PUZZLE || roomTile.room.type == RoomType.TRAP) {
                 name = RoomLists.shortNames.get(roomTile.room.name);
                 if(name == null) name = roomTile.room.name.replace(" ", "\n");
             }
-        } else if(PolyfrostConfig.showRoomNames == 2) { // All
+        } else if(PolyfrostConfig.MAP_DUNG_ROOM_NAMES == 2) { // All
             if(roomNamesDrawn.contains(roomTile.room.name)) return;
             name = roomTile.room.name.replace(" ", "\n");
             roomNamesDrawn.add(roomTile.room.name);

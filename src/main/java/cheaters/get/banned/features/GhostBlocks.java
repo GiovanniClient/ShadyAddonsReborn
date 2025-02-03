@@ -2,7 +2,6 @@ package cheaters.get.banned.features;
 
 import cheaters.get.banned.Shady;
 import cheaters.get.banned.events.ClickEvent;
-import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.stats.MiscStats;
 import cheaters.get.banned.utils.KeybindUtils;
@@ -23,7 +22,7 @@ public class GhostBlocks {
 
     @SubscribeEvent
     public void onRenderWorld(RenderWorldLastEvent event) {
-        if(PolyfrostConfig.ghostBlockKeybind && KeybindUtils.get("Create Ghost Block").isKeyDown()) {
+        if(PolyfrostConfig.GHOST_BLOCKS_KEYBIND && KeybindUtils.get("Create Ghost Block").isKeyDown()) {
             MovingObjectPosition object = Shady.mc.thePlayer.rayTrace(Shady.mc.playerController.getBlockReachDistance(), 1);
             if(object != null) {
                 if(object.getBlockPos() != null) {
@@ -39,7 +38,7 @@ public class GhostBlocks {
 
     @SubscribeEvent
     public void onRightClick(ClickEvent.Right event) {
-        if(Utils.inSkyBlock && PolyfrostConfig.stonkGhostBlock && Shady.mc.objectMouseOver != null && Shady.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && !Utils.isInteractable(Shady.mc.theWorld.getBlockState(Shady.mc.objectMouseOver.getBlockPos()).getBlock())) {
+        if(Utils.inSkyBlock && PolyfrostConfig.GHOST_BLOCKS_W_PICK && Shady.mc.objectMouseOver != null && Shady.mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK && !Utils.isInteractable(Shady.mc.theWorld.getBlockState(Shady.mc.objectMouseOver.getBlockPos()).getBlock())) {
             String itemId = Utils.getSkyBlockID(Shady.mc.thePlayer.getHeldItem());
             if(itemId.equals("STONK_PICKAXE") || itemId.equals("GOLD_PICKAXE")) {
                 Shady.mc.theWorld.setBlockToAir(Shady.mc.objectMouseOver.getBlockPos());

@@ -38,7 +38,7 @@ public class JungleCheddar {
      */
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
-        if (PolyfrostConfig.jungleCheddar && Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
+        if (PolyfrostConfig.JUNGLE_CHEDDAR && Utils.inSkyBlock && LocationUtils.onIsland(LocationUtils.Island.CRYSTAL_HOLLOWS)) {
 
             // running every 5 seconds, no need to run at 20hz
             if (tickCooldown < 100) {

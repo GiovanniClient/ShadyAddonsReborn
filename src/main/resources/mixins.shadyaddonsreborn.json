@@ -1,25 +1,27 @@
 {
-    "compatibilityLevel": "JAVA_8",
-    "package": "cheaters.get.banned.mixins",
-    "refmap": "mixins.shadyaddonsreborn.refmap.json",
-    "minVersion": "0.7",
-    "mixins": [
-        "MixinChunk",
-        "MixinGuiButton",
-        "MixinGuiContainer",
-        "MixinGuiMainMenu",
-        "MixinMinecraft",
-        "MixinModelEnderCrystal",
-        "MixinModList",
-        "MixinNetworkManager",
-        "MixinRendererLivingEntity",
-        "MixinSplashProgress",
-        "MixinChat"
-    ],
-    "client": [
-        "MixinAbstractClientPlayer",
-        "MixinGuiScreen",
-        "MixinNetHandlerPlayClient"
-    ],
-    "verbose": true
+  "compatibilityLevel": "JAVA_8",
+  "package": "cheaters.get.banned.mixins",
+  "refmap": "mixins.shadyaddonsreborn.refmap.json",
+  "minVersion": "0.7",
+  "mixins": [
+    "MixinChat",
+    "MixinChunk",
+    "MixinGuiButton",
+    "MixinGuiContainer",
+    "MixinGuiMainMenu",
+    "MixinMinecraft",
+    "MixinModelEnderCrystal",
+    "MixinModList",
+    "MixinNetworkManager",
+    "MixinRendererLivingEntity",
+    "MixinSplashProgress"
+  ],
+  "client": [
+    "MixinAbstractClientPlayer",
+    "MixinBlindness",
+    "MixinGuiScreen",
+    "MixinNausea",
+    "MixinNetHandlerPlayClient"
+  ],
+  "verbose": true
 }

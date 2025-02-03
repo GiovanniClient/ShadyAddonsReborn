@@ -14,6 +14,12 @@ import cheaters.get.banned.Shady;
 public class PolyfrostConfig extends Config {
     //TODO: make an HUD
 
+    @Switch(name = "No Blindness")
+    public static boolean NO_BLINDNESS = false;
+
+    @Switch(name = "No Nausea")
+    public static boolean NO_NAUSEA = false;
+
     @Switch(name = "Fake Ironman (chat symbol)")
     public static boolean FAKE_IRONMAN = false;
 

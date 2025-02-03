@@ -46,7 +46,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 @Mod(modid = Shady.MOD_ID, name = Shady.MOD_NAME, version = "@VER@", clientSideOnly = true)
 public class Shady {
@@ -56,6 +55,7 @@ public class Shady {
     public static final String MOD_NAME = "@NAME@";
     public static final String VERSION = "@VER@";
     public static final boolean BETA = VERSION.contains("-pre") || VERSION.equals("@VER"+"SION@");
+    public static final boolean DEBUG = true;
 
     // polyfrost stuff
     public static PolyfrostConfig polyfrostConfig;
@@ -63,17 +63,11 @@ public class Shady {
     public static final Minecraft mc = Minecraft.getMinecraft();
     public static boolean shouldCrash = false;
     public static final File dir = new File(new File(mc.mcDataDir, "config"), "shady");
-    public static final LocalDateTime loadTime = LocalDateTime.now();
 
-    public static boolean USING_SBA = false;
-    public static boolean USING_PATCHER = false;
-    public static boolean USING_SKYTILS = false;
-    public static boolean USING_SBE = false;
+    public static boolean USING_SBA = false, USING_PATCHER = false, USING_SKYTILS = false, USING_SBE = false;
 
     public static GuiScreen guiToOpen = null;
-    public static boolean enabled = true;
-    private static boolean sentPlayTimeData = false;
-    private static Pattern playTimePattern = Pattern.compile("You have (\\d*) hours and \\d* minutes playtime!");
+    public static boolean isShadyEnabled = true;
 
     public static ArrayList<Setting> settings = new ArrayList<>();
 
@@ -227,7 +221,7 @@ public class Shady {
     }
 
     public static void disable() {
-        enabled = false;
+        isShadyEnabled = false;
         for(Setting setting : settings) {
             if(setting instanceof BooleanSetting) setting.set(false);
             if(setting instanceof SelectSetting) setting.set(0);

@@ -1,7 +1,6 @@
 package cheaters.get.banned.features;
 
 import cheaters.get.banned.Shady;
-import cheaters.get.banned.gui.config.Config;
 import cheaters.get.banned.gui.polyconfig.PolyfrostConfig;
 import cheaters.get.banned.utils.LocationUtils;
 import cheaters.get.banned.utils.TabUtils;
@@ -14,6 +13,8 @@ import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+
+import static cheaters.get.banned.Shady.DEBUG;
 
 import java.util.*;
 
@@ -29,8 +30,6 @@ public class JungleCheddar {
     int tickCooldown = 0;
 
     private final Set<String> loadedChunks = new HashSet<>();
-
-    final boolean debug = false;
 
     /**
      * basically we check what every player has under their feet: if we find someone with stonebricks below their feet
@@ -55,11 +54,11 @@ public class JungleCheddar {
 
             if (!stonked && cheeseFound) {
                 if (areAllChunksLoaded()) {
-                    if (debug) Utils.out("Stonking from " + nw.toString() + " to " + se.toString());
+                    if (DEBUG) Utils.out("Stonking from " + nw.toString() + " to " + se.toString());
                     GhostBlocks.fillWithGhostBlocks(nw, se);
                     stonked = true;
                 } else {
-                    if (debug) Utils.out("Waiting for all chunks to load...");
+                    if (DEBUG) Utils.out("Waiting for all chunks to load...");
                 }
             }
 
@@ -89,7 +88,7 @@ public class JungleCheddar {
         loadedChunks.add(chunkKey);
 
         if (cheeseFound && !stonked && areAllChunksLoaded()) {
-            if (debug) Utils.out("All chunks loaded, re-stonking...");
+            if (DEBUG) Utils.out("All chunks loaded, re-stonking...");
             GhostBlocks.fillWithGhostBlocks(nw, se);
             stonked = true;
         }
@@ -101,7 +100,7 @@ public class JungleCheddar {
         loadedChunks.remove(chunkKey);
 
         if (cheeseFound && isChunkWithinCheese(event.getChunk().xPosition, event.getChunk().zPosition)) {
-            if (debug) Utils.out("Cuboid chunk unloaded, resetting stonked state.");
+            if (DEBUG) Utils.out("Cuboid chunk unloaded, resetting stonked state.");
             stonked = false;
         }
     }
@@ -109,7 +108,7 @@ public class JungleCheddar {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         if (Utils.inSkyBlock) {
-            if (debug) Utils.out("Cleared everything");
+            if (DEBUG) Utils.out("Cleared everything");
             clear();
         }
     }
@@ -156,7 +155,7 @@ public class JungleCheddar {
 
                     if (Shady.mc.theWorld.getBlockState(belowNpc2).getBlock() == Blocks.stonebrick) {
                         westTempleGuard = blockUnderWestGuard;
-                        if (debug) Utils.out("WTG: " + westTempleGuard);
+                        if (DEBUG) Utils.out("WTG: " + westTempleGuard);
                         else Utils.out("Kalhuiki Door Guardians found! Cheddar placed, may the alloy be with you.");
                         break;
                     }

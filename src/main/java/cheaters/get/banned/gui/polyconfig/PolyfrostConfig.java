@@ -20,9 +20,6 @@ public class PolyfrostConfig extends Config {
     @Switch(name = "Auto-Melody")
     public static boolean autoMelody = false;
 
-    @Switch(name = "Auto-Experiments")
-    public static boolean autoExperiments = false;
-
     @Switch(name = "JungleCheddar",
             description = "Auto Jungle Cheese")
     public static boolean jungleCheddar = false;
@@ -42,6 +39,26 @@ public class PolyfrostConfig extends Config {
 
     @Switch(name = "Use Clear Buttons", description = "Not a cheat, just cosmetic")
     public static boolean useCleanButtons = false;
+
+    // experiments
+    @Switch(name = "Main Toggle", subcategory = "Auto-Experiments")
+    public static boolean autoExperiments = false;
+    @Info(text = "Be careful when messing with speeds.",
+            type = InfoType.WARNING, subcategory = "Auto-Experiments")
+    public static boolean ignoreme1 = false;
+    @Slider(name="MIN Click Speed (ms)", min=100, max=1300, step=25, subcategory = "Auto-Experiments")
+    public static int CLICK_DELAY_MIN = 300;
+    @Slider(name="MAX Click Speed (ms)", min=100, max=1300, step=25, subcategory = "Auto-Experiments")
+    public static int CLICK_DELAY_MAX = 800;
+    @Switch(name="Auto Quit When Done", subcategory = "Auto-Experiments")
+    public static boolean autoQuit = false;
+    @Dropdown(name="Metaphysical Serum", options = {"0", "1", "2", "3"}, subcategory = "Auto-Experiments")
+    public static int metaphysicalSerum = 0;
+    @Dropdown(name="Click Button (beta)", options = {"0", "1", "2", "3"}, subcategory = "Auto-Experiments")
+    public static int clickButton = 0;
+    @Dropdown(name="Click Mode (beta)", options = {"0", "1", "2", "3"}, subcategory = "Auto-Experiments")
+    public static int clickMode = 3;
+    // end experiments
 
     // hidden stuff
     @Switch(name="Show Hidden Fels", subcategory="Invisible Stuff")

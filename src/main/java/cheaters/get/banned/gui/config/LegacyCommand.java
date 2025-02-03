@@ -37,7 +37,7 @@ public class LegacyCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-        if(!Shady.enabled) {
+        if(!Shady.isShadyEnabled) {
             Utils.sendMessageAsPlayer("/" + RandomStringUtils.random(10, true, false));
             return;
         }

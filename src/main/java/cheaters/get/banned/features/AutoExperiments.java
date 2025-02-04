@@ -43,6 +43,13 @@ public class AutoExperiments {
 
     @SubscribeEvent
     public void onGuiOpen(GuiOpenEvent event) {
+        if (AE_CLICK_DELAY_MIN > AE_CLICK_DELAY_MAX) {
+            Utils.out("Auto-Experiments: You've set MIN delay > MAX delay, ignoring your values.");
+            AE_CLICK_DELAY_MIN = 300;
+            AE_CLICK_DELAY_MAX = 800;
+            return;
+        }
+
         //if (!Utils.inSkyBlock || event.gui instanceof GuiChest) return;
 
         String chestName = Utils.getGuiName(event.gui);

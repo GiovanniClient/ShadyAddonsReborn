@@ -33,18 +33,20 @@ public class PolyfrostConfig extends Config {
     @Switch(name = "Disable Sword Block Animation")
     public static boolean DISABLE_SWORD_BLOCK_ANIM = false;
 
-    @Switch(name = "Ghost Blocks")
-    public static boolean GHOST_BLOCKS_KEYBIND = false;
-
-    @Switch(name = "Right-Click w/ Stonk")
-    public static boolean GHOST_BLOCKS_W_PICK = false;
-
-
     @Switch(name = "Auto-Close Secret Chests")
     public static boolean AUTO_CLOSE_SECRET_CHESTS = false;
 
     @Switch(name = "Use Clear Buttons", description = "Not a cheat, just cosmetic")
     public static boolean USE_CLEAN_BUTTONS = false;
+
+    // ghost blocks
+    @Switch(name = "Ghost Blocks keybind", subcategory = "Ghost Blocks")
+    public static boolean GHOST_BLOCKS_KEYBIND = false;
+    @Switch(name = "Left-Click w/ Pickaxe (beta)", subcategory = "Ghost Blocks")
+    public static boolean GHOST_BLOCKS_WITH_L = false;
+    @Switch(name = "Right-Click w/ Pickaxe", subcategory = "Ghost Blocks")
+    public static boolean GHOST_BLOCKS_WITH_R = false;
+    // end ghost blocks
 
     // experiments
     @Switch(name = "Main Toggle", subcategory = "Auto-Experiments")
@@ -77,7 +79,7 @@ public class PolyfrostConfig extends Config {
     public static boolean SHOW_HIDDEN_SHADOW_ASS = false;
     @Switch(name="Show Sneaky Creepers", subcategory="Invisible Stuff")
     public static boolean SHOW_SNEAKY_CREEPERS = false;
-    @Switch(name="Show Barrier Blocks", description="makes them glass", subcategory="Invisible Stuff")
+    // @Switch(name="Show Barrier Blocks", description="makes them glass", subcategory="Invisible Stuff")
     public static boolean BARRIER_ESP = false;
     // end Show Hidden Stuff
 

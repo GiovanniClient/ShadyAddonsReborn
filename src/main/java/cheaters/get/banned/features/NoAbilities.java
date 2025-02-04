@@ -6,7 +6,7 @@ import cheaters.get.banned.utils.Utils;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class BlockAbilities {
+public class NoAbilities {
 
     @SubscribeEvent
     public void onInteract(PlayerInteractEvent event) {

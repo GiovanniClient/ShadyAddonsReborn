@@ -55,7 +55,7 @@ public class Shady {
     public static final String MOD_NAME = "@NAME@";
     public static final String VERSION = "@VER@";
     public static final boolean BETA = VERSION.contains("-pre") || VERSION.equals("@VER"+"SION@");
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     // polyfrost stuff
     public static PolyfrostConfig polyfrostConfig;
@@ -106,16 +106,16 @@ public class Shady {
         MinecraftForge.EVENT_BUS.register(new JungleCheddar());
         MinecraftForge.EVENT_BUS.register(new BarrierESP());
 
-        MinecraftForge.EVENT_BUS.register(new BlockAbilities()); // blocca abilità col dx
+        MinecraftForge.EVENT_BUS.register(new NoAbilities());
         MinecraftForge.EVENT_BUS.register(new StonklessStonk()); // ghosthand
-        MinecraftForge.EVENT_BUS.register(new GhostBlocks()); // non funziona !!!!!!!!!!!!!!!!!!
+        MinecraftForge.EVENT_BUS.register(new GhostBlocks());
         MinecraftForge.EVENT_BUS.register(new AutoCloseChest());
         //MinecraftForge.EVENT_BUS.register(new RoyalPigeonMacro());
         //MinecraftForge.EVENT_BUS.register(new AutoGG());
         //MinecraftForge.EVENT_BUS.register(new AutoSimonSays());
         //MinecraftForge.EVENT_BUS.register(new AbilityKeybind());
         //MinecraftForge.EVENT_BUS.register(new AutoClicker());
-        //MinecraftForge.EVENT_BUS.register(new AutoRenewCrystalHollows());
+        //MinecraftForge.EVENT_BUS.register(new AutoRenewCrystalHollows());BlockAbilities
         MinecraftForge.EVENT_BUS.register(new DisableSwordAnimation());
         MinecraftForge.EVENT_BUS.register(new ShowHiddenEntities());
         //MinecraftForge.EVENT_BUS.register(new HideSummons());

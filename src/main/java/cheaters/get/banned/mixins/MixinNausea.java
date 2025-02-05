@@ -28,7 +28,7 @@ public class MixinNausea {
     private void redirectRotatePositive(float angle, float x, float y, float z) {
         EntityPlayer player = Shady.mc.thePlayer;
         if (player != null && player.isPotionActive(Potion.confusion) && NO_NAUSEA) {
-            if (DEBUG) Utils.out("Blocking nausea positive rotate");
+            Utils.debug("Blocking nausea positive rotate");
             // Skip this rotation
             return;
         }
@@ -48,7 +48,7 @@ public class MixinNausea {
     private void redirectScale(float x, float y, float z) {
         EntityPlayer player = Shady.mc.thePlayer;
         if (player != null && player.isPotionActive(Potion.confusion) && NO_NAUSEA) {
-            if (DEBUG) Utils.out("Blocking nausea scale");
+            Utils.debug("Blocking nausea scale");
             // Instead of scaling by 1/f2, force identity scale
             GlStateManager.scale(1.0F, 1.0F, 1.0F);
             return;
@@ -68,7 +68,7 @@ public class MixinNausea {
     private void redirectRotateNegative(float angle, float x, float y, float z) {
         EntityPlayer player = Shady.mc.thePlayer;
         if (player != null && player.isPotionActive(Potion.confusion) && NO_NAUSEA) {
-            if (DEBUG) Utils.out("Blocking nausea negative rotate");
+            Utils.debug("Blocking nausea negative rotate");
             // Skip this rotation
             return;
         }

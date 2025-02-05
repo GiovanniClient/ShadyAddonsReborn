@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import static cheaters.get.banned.Shady.DEBUG;
 import static cheaters.get.banned.gui.polyconfig.PolyfrostConfig.*;
 
 public class AutoExperiments {
@@ -26,9 +25,9 @@ public class AutoExperiments {
         NONE
     }
 
-    // Constants for easy tuning
-    private final int START_DELAY_MIN = 333;  // Min startup delay (ms)
-    private final int START_DELAY_MAX = 2222;  // Max startup delay (ms)
+    // You may ask me, what are these numbers based on? You see, that's a great question, basically
+    private final int START_DELAY_MIN = 234; // ms
+    private final int START_DELAY_MAX = 678;
 
     private final int END_DELAY_MIN = 777;
     private final int END_DELAY_MAX = 3333;
@@ -55,14 +54,19 @@ public class AutoExperiments {
         String chestName = Utils.getGuiName(event.gui);
 
         if (chestName.startsWith("Chronomatron (")) {
+            Utils.debug("Chronomatron detected");
             currentExperiment = ExperimentType.CHRONOMATRON;
         } else if (chestName.startsWith("Ultrasequencer (")) {
+            Utils.debug("Ultrasequencer detected");
             currentExperiment = ExperimentType.ULTRASEQUENCER;
         } else if (chestName.startsWith("Superpairs(")) {
+            Utils.debug("Superpairs detected");
             currentExperiment = ExperimentType.SUPERPAIRS;
         } else if (chestName.contains("Over")) {
+            Utils.debug("Experiment over.");
             currentExperiment = ExperimentType.END;
         } else clear();
+
     }
 
     @SubscribeEvent
@@ -76,7 +80,7 @@ public class AutoExperiments {
         // Small random startup delay (200-600ms)
         if (startDelay == -1) {
             startDelay = rightNow + new Random().nextInt(START_DELAY_MAX - START_DELAY_MIN) + START_DELAY_MIN;
-            if (DEBUG) Utils.out("Start delay: " + (startDelay - rightNow));
+            Utils.debug("Start delay: " + (startDelay - rightNow));
         }
 
         if (rightNow < startDelay) return;
@@ -84,6 +88,7 @@ public class AutoExperiments {
         switch (currentExperiment) {
             // exits the experiment on a chain of 9
             case CHRONOMATRON:
+                // LIGHTGEM is supposed to be glowstone btw. Wtf notch?
                 if (container.getSlot(49).getStack().getItem().getUnlocalizedName().toUpperCase().contains("LIGHTGEM") &&
                         !container.getSlot(lastAdded).getStack().isItemEnchanted()) {
                     sequenceAdded = false;
@@ -94,9 +99,11 @@ public class AutoExperiments {
 
                 // saves the sequence
                 if (!sequenceAdded && container.getSlot(49).getStack().getItem() == Items.clock) {
+                    Utils.debug("salviamo");
                     for (int i = 10; i <= 43; i++) {
-                        if (container.getSlot(i).getStack().isItemEnchanted()) {
+                        if (container.getSlot(i).getStack() != null && container.getSlot(i).getStack().isItemEnchanted()) {
                             chronomatronOrder.add(i);
+                            Utils.debug("aggiungo " + i);
                             lastAdded = i;
                             sequenceAdded = true;
                             clicks = 0;
@@ -111,7 +118,7 @@ public class AutoExperiments {
 
                     if (clickDelay == -1) {
                         clickDelay =  rightNow + new Random().nextInt(AE_CLICK_DELAY_MAX - AE_CLICK_DELAY_MIN) + AE_CLICK_DELAY_MIN;
-                        if (DEBUG) Utils.out("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
+                        Utils.debug("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
                     }
 
                     if (rightNow > clickDelay) {
@@ -146,7 +153,7 @@ public class AutoExperiments {
 
                     if (clickDelay == -1) {
                         clickDelay =  rightNow + new Random().nextInt(AE_CLICK_DELAY_MAX - AE_CLICK_DELAY_MIN) + AE_CLICK_DELAY_MIN;
-                        if (DEBUG) Utils.out("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
+                        Utils.debug("Note n" + (clicks+1) + ", Click delay: " + (clickDelay-rightNow) + "ms");
                     }
 
                     if (rightNow > clickDelay) {
@@ -167,7 +174,7 @@ public class AutoExperiments {
             case END:
                 if (endDelay == -1) {
                     endDelay =  rightNow + new Random().nextInt(END_DELAY_MAX - END_DELAY_MIN) + END_DELAY_MIN;
-                    if (DEBUG) Utils.out("End delay: " + (endDelay-rightNow) + "ms");
+                    Utils.debug("End delay: " + (endDelay-rightNow) + "ms");
                 }
 
                 if (rightNow > endDelay && AE_AUTO_QUIT) {
@@ -184,6 +191,7 @@ public class AutoExperiments {
 
 
     private void clickSlot(int slot) {
+        Utils.debug("clicking slot " + slot);
         Shady.mc.playerController.windowClick(Shady.mc.thePlayer.openContainer.windowId, slot, AE_CLICK_BUTTON, AE_CLICK_MODE, Shady.mc.thePlayer);
     }
 

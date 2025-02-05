@@ -54,11 +54,11 @@ public class JungleCheddar {
 
             if (!stonked && cheeseFound) {
                 if (areAllChunksLoaded()) {
-                    if (DEBUG) Utils.out("Stonking from " + nw.toString() + " to " + se.toString());
+                    Utils.debug("Stonking from " + nw.toString() + " to " + se.toString());
                     GhostBlocks.fillWithGhostBlocks(nw, se);
                     stonked = true;
                 } else {
-                    if (DEBUG) Utils.out("Waiting for all chunks to load...");
+                    Utils.debug("Waiting for all chunks to load...");
                 }
             }
 
@@ -88,7 +88,7 @@ public class JungleCheddar {
         loadedChunks.add(chunkKey);
 
         if (cheeseFound && !stonked && areAllChunksLoaded()) {
-            if (DEBUG) Utils.out("All chunks loaded, re-stonking...");
+            Utils.debug("All chunks loaded, re-stonking...");
             GhostBlocks.fillWithGhostBlocks(nw, se);
             stonked = true;
         }
@@ -100,7 +100,7 @@ public class JungleCheddar {
         loadedChunks.remove(chunkKey);
 
         if (cheeseFound && isChunkWithinCheese(event.getChunk().xPosition, event.getChunk().zPosition)) {
-            if (DEBUG) Utils.out("Cuboid chunk unloaded, resetting stonked state.");
+            Utils.debug("Cuboid chunk unloaded, resetting stonked state.");
             stonked = false;
         }
     }
@@ -108,7 +108,7 @@ public class JungleCheddar {
     @SubscribeEvent
     public void onWorldLoad(WorldEvent.Load event) {
         if (Utils.inSkyBlock) {
-            if (DEBUG) Utils.out("Cleared everything");
+            Utils.debug("Cleared everything");
             clear();
         }
     }
@@ -155,8 +155,8 @@ public class JungleCheddar {
 
                     if (Shady.mc.theWorld.getBlockState(belowNpc2).getBlock() == Blocks.stonebrick) {
                         westTempleGuard = blockUnderWestGuard;
-                        if (DEBUG) Utils.out("WTG: " + westTempleGuard);
-                        else Utils.out("Kalhuiki Door Guardians found! Cheddar placed, may the alloy be with you.");
+                        Utils.debug("WTG: " + westTempleGuard);
+                        Utils.out("Kalhuiki Door Guardians found! Cheddar placed, may the alloy be with you.");
                         break;
                     }
                 }

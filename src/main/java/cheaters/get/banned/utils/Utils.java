@@ -23,6 +23,8 @@ import java.util.List;
 import java.util.*;
 import java.util.regex.Pattern;
 
+import static cheaters.get.banned.Shady.DEBUG;
+
 public class Utils {
 
     public static boolean inSkyBlock = false;
@@ -140,6 +142,10 @@ public class Utils {
         if(ClientCommandHandler.instance.executeCommand(Shady.mc.thePlayer, command) == 0) {
             sendMessageAsPlayer(command);
         }
+    }
+
+    public static void debug(String msg) {
+        if (DEBUG) out(msg);
     }
 
     public static void out(String message) {

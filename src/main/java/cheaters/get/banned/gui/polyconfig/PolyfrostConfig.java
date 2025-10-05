@@ -20,6 +20,9 @@ public class PolyfrostConfig extends Config {
     @Switch(name = "No Nausea")
     public static boolean NO_NAUSEA = false;
 
+    @Switch(name = "No Thunders")
+    public static boolean NO_THUNDERS = false;
+
     @Switch(name = "Fake Ironman (chat symbol)")
     public static boolean FAKE_IRONMAN = false;
 

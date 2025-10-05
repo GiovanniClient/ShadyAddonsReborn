@@ -25,7 +25,9 @@ import cheaters.get.banned.utils.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.settings.KeyBinding;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -154,6 +156,10 @@ public class Shady {
         USING_PATCHER = Loader.isModLoaded("patcher");
         USING_SKYTILS = Loader.isModLoaded("skytils");
         USING_SBE = Loader.isModLoaded("skyblockextras");
+
+        RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
+        renderManager.entityRenderMap.put(EntityLightningBolt.class, new NoRenderLightning(renderManager));
+
 
         cheaters.get.banned.remote.Capes.load(); // TODO: Figure out how to make this async
 

@@ -1,4 +1,8 @@
-# ShadyAddonsReborn
+.
+<br />
+# THIS IS NOT SUPPORTED ANYMORE. USE [GiovanniClient](https://github.com/GiovanniClient/giovanni-client)
+<br /><br /><br />
+# ~ShadyAddonsReborn~
 
 > [!NOTE]
 > ## What (was) this mod?
